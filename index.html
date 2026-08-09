@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>台灣啦啦隊搜尋引擎 · CPBL Cheer Hub</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>">
+<style>
+  :root{
+    --bg:#0c0a14; --panel:#171423; --panel2:#201b31; --line:#2f2942;
+    --text:#f0ecf8; --muted:#a294bb; --accent:#ff4d8d; --accent2:#5cc8ff;
+    --live:#ff3b3b; --radius:16px; --shadow:0 10px 34px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif;
+    background:radial-gradient(1100px 560px at 85% -12%,#241a4d 0,transparent 55%),
+               radial-gradient(900px 500px at 0% 0%,#3a1533 0,transparent 45%),var(--bg);
+    color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  header{position:sticky;top:0;z-index:30;background:rgba(12,10,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .head-in{max-width:1160px;margin:0 auto;padding:14px 20px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .brand .mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:21px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
+  .brand h1{margin:0;font-size:19px;letter-spacing:.5px}
+  .brand small{display:block;font-size:10.5px;color:var(--muted);letter-spacing:2.5px;font-weight:700}
+  .upd{margin-left:auto;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+  .upd .live-dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,59,59,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.55)}70%{box-shadow:0 0 0 7px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
+  .search{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+  .search:focus-within{border-color:var(--accent)}
+  .search svg{width:20px;height:20px;fill:var(--muted);flex:none}
+  .search input{flex:1;background:0;border:0;outline:0;color:var(--text);font-size:16px}
+  .launch{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .launch button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:.15s}
+  .launch button:hover,.launch button:focus-visible{border-color:var(--accent);transform:translateY(-1px);outline:none}
+  .hint{color:var(--muted);font-size:12px;margin-top:8px}
+  main{max-width:1160px;margin:0 auto;padding:20px}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px}
+  .tab{flex:none;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:9px 16px;font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center;white-space:nowrap;transition:.15s}
+  .tab .dot{width:10px;height:10px;border-radius:50%}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:#fff;border-color:transparent}
+  .sec-title{display:flex;align-items:center;gap:10px;margin:26px 2px 14px;font-size:16px;font-weight:800}
+  .sec-title .bar{width:4px;height:18px;border-radius:3px;background:linear-gradient(var(--accent),var(--accent2))}
+  .sec-title small{color:var(--muted);font-weight:600;font-size:12px}
+  /* news */
+  .news{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .newsitem{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;transition:.15s}
+  .newsitem:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .newsitem .t{font-weight:700;font-size:14px;line-height:1.45;margin:0 0 8px}
+  .newsitem .m{display:flex;gap:10px;font-size:11.5px;color:var(--muted)}
+  .newsitem .m .src{color:var(--accent2);font-weight:700}
+  /* youtube */
+  .ytgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .ytcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .ytcard .cap{display:flex;align-items:center;gap:8px;padding:11px 14px;font-weight:800;font-size:14px}
+  .ytcard .cap .live{font-size:10.5px;font-weight:800;color:#fff;background:var(--live);padding:2px 7px;border-radius:5px;letter-spacing:.5px}
+  .ytframe{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+  .ytframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ytcard .row{display:flex;gap:8px;padding:11px 14px}
+  .ytcard .row a{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:8px;border-radius:9px;background:var(--panel2);border:1px solid var(--line)}
+  .ytcard .row a:hover{border-color:var(--accent)}
+  /* teams */
+  .teamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .teamcard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+  .teamcard .top{padding:18px 18px 14px;position:relative;overflow:hidden}
+  .teamcard .top .emo{position:absolute;right:-8px;bottom:-22px;font-size:96px;opacity:.18}
+  .teamcard .top h3{margin:0;font-size:20px}
+  .teamcard .top .en{font-size:12px;color:rgba(255,255,255,.85);font-weight:700;letter-spacing:1px}
+  .teamcard .top .team{font-size:12.5px;color:rgba(255,255,255,.94);margin-top:6px}
+  .links{display:flex;flex-wrap:wrap;gap:7px;padding:14px}
+  .links a{font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;gap:5px;transition:.15s}
+  .links a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .count{color:var(--muted);font-size:13px;margin:4px 2px 12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:.18s;position:relative}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
+  .av{height:120px;display:grid;place-items:center;font-size:34px;font-weight:800;color:#fff;letter-spacing:1px}
+  .card .b{padding:10px 12px}
+  .card .n{font-weight:800;font-size:15px;margin:0}
+  .card .r{color:var(--muted);font-size:11.5px;margin:3px 0 0}
+  .flag{position:absolute;top:8px;left:8px;font-size:15px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  .srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .srcgroup{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px}
+  .srcgroup h4{margin:0 0 10px;font-size:14px}
+  .srcgroup a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;font-size:13.5px;transition:.12s}
+  .srcgroup a:hover{background:var(--panel2)}
+  .srcgroup a .ic{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:14px;background:var(--panel2);flex:none}
+  .srcgroup a .meta{flex:1;min-width:0}
+  .srcgroup a .meta b{display:block;font-weight:700}
+  .srcgroup a .meta span{font-size:11px;color:var(--muted)}
+  .srcgroup a .go{color:var(--muted);font-size:12px}
+  .empty{text-align:center;color:var(--muted);padding:40px 0}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
+  .overlay.show{display:flex}
+  .modal{width:min(440px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);animation:pop .18s ease}
+  @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+  @media (prefers-reduced-motion:reduce){.modal{animation:none}.card:hover,.launch button:hover,.links a:hover,.newsitem:hover{transform:none}.upd .live-dot{animation:none}}
+  .modal .hero{height:150px;display:grid;place-items:center;font-size:52px;font-weight:800;color:#fff;position:relative}
+  .modal .hero .x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.4);border:0;color:#fff;font-size:17px;cursor:pointer}
+  .modal .body{padding:18px 20px 22px}
+  .modal h2{margin:0 0 2px;font-size:23px}
+  .modal .sub{color:var(--muted);margin:0 0 4px;font-size:13px}
+  .modal .tagline{color:var(--muted);font-size:12.5px;margin:0 0 16px}
+  .socials{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .socials a{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:11px;background:var(--panel2);border:1px solid var(--line);font-size:13.5px;font-weight:700;transition:.14s}
+  .socials a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .socials a .em{font-size:16px}
+  .modal .note{margin:14px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5}
+  footer{max-width:1160px;margin:0 auto;padding:10px 20px 44px;color:var(--muted);font-size:12px;line-height:1.7}
+  footer b{color:var(--text)}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="brand">
+      <div class="mark">📣</div>
+      <div><h1>台灣啦啦隊搜尋引擎</h1><small>CPBL CHEER HUB · 即時整合</small></div>
+      <div class="upd" id="upd"><span class="live-dot"></span><span id="updtxt">載入中…</span></div>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1114 9.5 4.5 4.5 0 019.5 14z"/></svg>
+      <input id="q" placeholder="搜尋任何啦啦隊員 / 隊伍 / 關鍵字…(例:林襄、峮峮、樂天女孩)">
+    </div>
+    <div class="launch" id="launch"></div>
+    <div class="hint">💡 即時新聞與 YouTube 由機器人每小時自動更新;打字可送到各平台即時搜尋,下方名錄同步篩選。</div>
+  </div>
+</header>
+
+<main>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+</main>
+
+<footer id="foot"></footer>
+
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+
+<script>
+const TEAMS=[
+  {id:"rakuten",name:"Rakuten Girls",zh:"樂天女孩",team:"樂天桃猿",emo:"🐵",color:"#c8102e",grad:["#c8102e","#7a0a1c"],slug:"rakuten-girls"},
+  {id:"fubon",name:"Fubon Angels",zh:"富邦悍將啦啦隊",team:"富邦悍將",emo:"😇",color:"#1552c9",grad:["#1552c9","#0a2a63"],slug:"fubon-angels"},
+  {id:"passion",name:"Passion Sisters",zh:"中信兄弟啦啦隊",team:"中信兄弟",emo:"🐘",color:"#e0a400",grad:["#e0a400","#9a6f00"],slug:"passion-sisters"},
+  {id:"uni",name:"Uni-Girls",zh:"統一獅啦啦隊",team:"統一7-ELEVEn獅",emo:"🦁",color:"#f26522",grad:["#f26522","#b8410f"],slug:"uni-girls"},
+  {id:"dragon",name:"Dragon Beauties",zh:"新光人壽小龍女",team:"味全龍",emo:"🐉",color:"#e4002b",grad:["#e4002b","#8a0019"],slug:"dragon-beauties"},
+  {id:"tsg",name:"Wing Stars",zh:"台鋼雄鷹啦啦隊",team:"台鋼雄鷹",emo:"🦅",color:"#2b3a8c",grad:["#3247a8","#141d44"],slug:"wing-stars"},
+];
+const M=[
+  ["rakuten","曲曲","隊長",""],["rakuten","筠熹","副隊長",""],["rakuten","琳妲","",""],["rakuten","嘎琳","",""],
+  ["rakuten","小紫","",""],["rakuten","宋宋","",""],["rakuten","卉妮","",""],["rakuten","穎樂","",""],
+  ["rakuten","笑笑","",""],["rakuten","熊霓","",""],["rakuten","彭彭","",""],["rakuten","溫妮","",""],
+  ["rakuten","高橋佳帆","日籍",""],["rakuten","河智媛","韓籍",""],["rakuten","廉世彬","韓籍",""],["rakuten","禹洙漢","韓籍",""],
+  ["fubon","潔米","大隊長",""],["fubon","慈妹","",""],["fubon","丹丹","",""],["fubon","秀秀子","",""],
+  ["fubon","檸檬","",""],["fubon","Jessy","",""],["fubon","奶昔","",""],["fubon","卡洛琳","",""],
+  ["fubon","栗子","",""],["fubon","小芊","",""],["fubon","貝兒","",""],["fubon","Laynee","",""],
+  ["fubon","李雅英","韓籍",""],["fubon","南珉貞","韓籍",""],["fubon","李珠珢","韓籍",""],["fubon","朴星垠","韓籍",""],
+  ["passion","峮峮","人氣招牌",""],["passion","貴貴","",""],["passion","凱蒂","",""],["passion","希希","",""],
+  ["passion","小安","",""],["passion","波波","",""],["passion","妮可","",""],["passion","林可","",""],
+  ["passion","曼容","",""],["passion","牛奶","",""],["passion","芊芊","",""],["passion","少鹽","",""],
+  ["passion","李丹妃","韓籍",""],["passion","邊荷律","韓籍",""],["passion","JJUBI","韓籍",""],["passion","金渡兒","韓籍",""],["passion","菊池桃子","日籍",""],
+  ["uni","MAGGIE","隊長",""],["uni","JOY","副隊長",""],
+  ["uni","安琪","","muancheoo"],["uni","子筑","","julieyuan1319"],["uni","姿琳","","yt_k14"],
+  ["uni","姸蓁","","yennn_1530"],["uni","培根","","bacon_she"],["uni","若婷","練習生","la_0915_"],
+  ["uni","小妤","練習生","judy_.1028"],["uni","魚兒","練習生","e.mmmilk_"],["uni","羽娜","練習生","yunana.1213"],
+  ["uni","Ella","練習生","ella_lin_29"],["uni","沐沐","練習生","mu.mu_39"],
+  ["uni","趙娟週","韓籍",""],["uni","文慧真","韓籍",""],["uni","安惠志","韓籍",""],["uni","Nozomi","日籍",""],["uni","Chihiro","日籍",""],
+  ["dragon","李多慧","Captain·韓籍",""],["dragon","金娜妍","韓籍",""],["dragon","權喜原","韓籍",""],
+  ["dragon","小映","隊長",""],["dragon","林襄","副隊長",""],["dragon","小蛙","舞蹈總監",""],
+  ["dragon","瑄瑄","",""],["dragon","姵宸","",""],["dragon","貝拉","",""],["dragon","張愛","練習生",""],["dragon","佳依","練習生",""],
+  ["tsg","安芝儇","人氣·韓籍",""],["tsg","朴旻曙","韓籍",""],["tsg","一粒","",""],
+].map(a=>({t:a[0],n:a[1],r:a[2],ig:a[3]}));
+const SOURCES=[
+  {group:"📚 啦啦隊百科(全隊員 · 持續更新)",items:[
+    {t:"ShowLove 女神百科",d:"各隊成員資料＋IG 整理",u:"https://cheer.showlove.me/",ic:"💖"},
+    {t:"CPBL 香香百科 cpblgirls",d:"中職啦啦隊女孩百科",u:"https://cpblgirls.tw/",ic:"🍬"},
+    {t:"FUNTOP 啦啦隊懶人包",d:"個資 / FB 粉專整理",u:"https://funtop.tw/category/cheerleaders/",ic:"📑"},
+    {t:"維基 · 中華職棒啦啦隊",d:"歷年名單與異動",u:"https://zh.wikipedia.org/zh-tw/中華職棒啦啦隊",ic:"🌐"},
+  ]},
+  {group:"📰 新聞 · 賽事",items:[
+    {t:"CPBL 中華職棒官網",d:"官方賽程 / 戰績 / 售票",u:"https://www.cpbl.com.tw/",ic:"⚾"},
+    {t:"Yahoo 運動應援通",d:"每場啦啦隊應援班表",u:"https://tw.sports.yahoo.com/cheerleader",ic:"📣"},
+    {t:"ETtoday 運動雲",d:"啦啦隊即時新聞",u:"https://sports.ettoday.net/",ic:"📱"},
+    {t:"自由體育",d:"最新異動 / 轉隊消息",u:"https://sports.ltn.com.tw/",ic:"🗞️"},
+  ]},
+  {group:"📅 應援班表",items:[
+    {t:"lala.pythings 班表站",d:"六隊每日應援班表",u:"https://lala.pythings.dev/",ic:"🗓️"},
+    {t:"味全龍官方班表",d:"小龍女賽事班表",u:"https://www.wdragons.com/category/beauties/",ic:"🐉"},
+  ]},
+  {group:"💬 社群 · 論壇",items:[
+    {t:"PTT CheerGirlsTW",d:"啦啦隊看板即時討論",u:"https://www.ptt.cc/bbs/CheerGirlsTW/index.html",ic:"💻"},
+    {t:"Threads 啦啦隊搜尋",d:"即時貼文動態",u:"https://www.threads.net/search?q=啦啦隊",ic:"🧵"},
+    {t:"Instagram 探索",d:"啦啦隊 hashtag",u:"https://www.instagram.com/explore/tags/啦啦隊/",ic:"📸"},
+    {t:"YouTube 啦啦隊直播",d:"應援直播 / 精華",u:"https://www.youtube.com/results?search_query=中職+啦啦隊+直播",ic:"▶️"},
+  ]},
+];
+
+let FEED=null, view="live", query="";
+const g=q=>encodeURIComponent(q);
+const $=s=>document.querySelector(s);
+const T=id=>TEAMS.find(x=>x.id===id);
+const gc=t=>`linear-gradient(135deg,${t.grad[0]},${t.grad[1]})`;
+const flag=r=>/韓/.test(r)?"🇰🇷":/日/.test(r)?"🇯🇵":"";
+const initials=n=>n.replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()||n.slice(0,1);
+const openU=u=>window.open(u,"_blank","noopener");
+const esc=s=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function timeAgo(str){
+  const d=new Date(str); if(isNaN(d)) return "";
+  const s=(Date.now()-d.getTime())/1000;
+  if(s<3600) return Math.max(1,Math.floor(s/60))+" 分鐘前";
+  if(s<86400) return Math.floor(s/3600)+" 小時前";
+  return Math.floor(s/86400)+" 天前";
+}
+
+const PLATFORMS=[
+  {k:"news",i:"📰",label:"新聞",f:q=>`https://news.google.com/search?q=${g(q)}&hl=zh-TW&gl=TW`},
+  {k:"ig",i:"📸",label:"IG貼文",f:q=>`https://www.google.com/search?q=${g(q+" site:instagram.com")}`},
+  {k:"th",i:"🧵",label:"Threads",f:q=>`https://www.threads.net/search?q=${g(q)}`},
+  {k:"yt",i:"▶️",label:"YouTube",f:q=>`https://www.youtube.com/results?search_query=${g(q)}`},
+  {k:"x",i:"✖️",label:"X",f:q=>`https://twitter.com/search?q=${g(q)}`},
+  {k:"fb",i:"📘",label:"FB貼文",f:q=>`https://www.google.com/search?q=${g(q+" site:facebook.com")}`},
+  {k:"wiki",i:"💖",label:"百科",f:q=>`https://cheer.showlove.me/?s=${g(q)}`},
+  {k:"g",i:"🔎",label:"綜合",f:q=>`https://www.google.com/search?q=${g(q+" 啦啦隊")}`},
+];
+function renderLaunch(){
+  $("#launch").innerHTML=PLATFORMS.map(p=>`<button data-k="${p.k}"><span>${p.i}</span>${p.label}</button>`).join("");
+  document.querySelectorAll("#launch button").forEach(b=>b.onclick=()=>{
+    const term=query.trim()||"中職 啦啦隊";
+    openU(PLATFORMS.find(x=>x.k===b.dataset.k).f(term));
+  });
+}
+function teamLinks(t){return[
+  {t:"📚 百科",u:`https://cheer.showlove.me/team/${t.slug}/`},
+  {t:"🍬 香香百科",u:`https://cpblgirls.tw/`},
+  {t:"📰 新聞",u:`https://news.google.com/search?q=${g(t.zh+" "+t.team)}&hl=zh-TW&gl=TW`},
+  {t:"▶️ YouTube",u:`https://www.youtube.com/results?search_query=${g(t.zh)}`},
+  {t:"📸 IG",u:`https://www.google.com/search?q=${g(t.zh+" instagram 官方")}`},
+  {t:"📘 FB",u:`https://www.facebook.com/search/top?q=${g(t.zh)}`},
+  {t:"🧵 Threads",u:`https://www.threads.net/search?q=${g(t.zh)}`},
+  {t:"📅 班表",u:`https://lala.pythings.dev/`},
+];}
+
+function renderTabs(){
+  const tabs=[{id:"live",zh:"🔴 即時",color:"#ff3b3b"},{id:"all",zh:"全部隊員",color:"#ff4d8d"},...TEAMS,{id:"sources",zh:"資訊源",color:"#5cc8ff"}];
+  $("#tabs").innerHTML=tabs.map(t=>{
+    const a=t.id===view;
+    return `<div class="tab ${a?'active':''}" data-id="${t.id}" style="${a?`background:${t.grad?gc(t):'linear-gradient(135deg,#ff4d8d,#5cc8ff)'};`:''}"><span class="dot" style="background:${t.color||'#888'}"></span>${t.zh||t.name}</div>`;
+  }).join("");
+  document.querySelectorAll(".tab").forEach(el=>el.onclick=()=>{view=el.dataset.id;window.scrollTo(0,0);render();});
+}
+function newsList(items){
+  if(!items||!items.length) return `<div class="empty">${FEED?'目前沒有相關新聞':'⏳ 新聞由機器人每小時更新;若剛部署,稍候即會出現。'}</div>`;
+  return `<div class="news">${items.map(n=>`<a class="newsitem" href="${esc(n.link)}" target="_blank" rel="noopener">
+    <p class="t">${esc(n.title)}</p><div class="m"><span class="src">${esc(n.source)||'新聞'}</span><span>${timeAgo(n.pub)}</span></div></a>`).join("")}</div>`;
+}
+function ytBlock(tid){
+  const y=FEED&&FEED.youtube&&FEED.youtube[tid];
+  if(!y||!y.videos||!y.videos.length) return "";
+  const t=T(tid), v=y.videos[0];
+  return `<div class="ytcard">
+    <div class="cap">${t.emo} ${t.zh} <span class="live">最新</span></div>
+    <div class="ytframe"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${v.id}" title="${esc(v.title)}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+    <div class="row"><a href="${y.channelUrl}/streams" target="_blank" rel="noopener">🔴 看直播</a><a href="${y.channelUrl}/videos" target="_blank" rel="noopener">📺 更多影片</a></div>
+  </div>`;
+}
+function renderLive(){
+  const news=FEED&&FEED.news?FEED.news.all:null;
+  const yts=TEAMS.map(t=>ytBlock(t.id)).filter(Boolean).join("");
+  return `<div class="sec-title"><span class="bar"></span>🔴 即時新聞 <small>機器人每小時自動抓取 · 點擊看原文</small></div>
+    ${newsList(news)}
+    ${yts?`<div class="sec-title"><span class="bar"></span>📺 各隊最新影片 / 直播 <small>YouTube 官方頻道</small></div><div class="ytgrid">${yts}</div>`:''}
+    <div class="sec-title"><span class="bar"></span>🔎 快速搜尋 <small>把任何關鍵字送到各平台</small></div>
+    <div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">${t.name}</div></div><div class="links">${teamLinks(t).slice(0,6).map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`).join("")}</div></div>`).join("")}</div>`;
+}
+function memberCard(m){
+  const t=T(m.t);
+  return `<div class="card" data-i="${M.indexOf(m)}">${flag(m.r)?`<div class="flag">${flag(m.r)}</div>`:''}<div class="av" style="background:${gc(t)}">${initials(m.n)}</div><div class="b"><p class="n">${m.n}</p><p class="r">${t.zh}${m.r?' · '+m.r:''}</p></div></div>`;
+}
+function filtered(){
+  const q=query.trim().toLowerCase();
+  return M.filter(m=>{
+    const t=T(m.t);
+    const okV=(view==="all"||view==="live")||m.t===view;
+    const okQ=!q||m.n.toLowerCase().includes(q)||(m.r||"").toLowerCase().includes(q)||t.zh.toLowerCase().includes(q)||t.name.toLowerCase().includes(q)||t.team.toLowerCase().includes(q);
+    return okV&&okQ;
+  });
+}
+function renderTeamHubs(){
+  return `<div class="sec-title"><span class="bar"></span>六隊入口 <small>官方 / 百科 / 新聞 / 直播 / 班表</small></div><div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">${t.name}</div><div class="team">所屬球隊 · ${t.team}</div></div><div class="links">${teamLinks(t).map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`).join("")}</div></div>`).join("")}</div>`;
+}
+function renderMembers(){
+  const list=filtered();
+  const head=`<div class="sec-title"><span class="bar"></span>${(view==="all"||view==="live")?"主要成員名錄":T(view).zh+" 成員"} <small>2026 快照 · 完整最新名單請點「百科」</small></div><div class="count">顯示 ${list.length} 位 · 點卡片一鍵直達本人社群</div>`;
+  const body=list.length?`<div class="grid">${list.map(memberCard).join("")}</div>`:`<div class="empty">🔍 名錄中沒有「${esc(query)}」<br><small>試試上方按鈕到新聞 / IG / 百科即時搜尋</small></div>`;
+  return head+body;
+}
+function renderSources(){
+  const src=`<div class="sec-title"><span class="bar"></span>資訊源聚合 <small>新聞 · 社群 · 班表 · 論壇 · 百科</small></div><div class="srcgrid">${SOURCES.map(gp=>`<div class="srcgroup"><h4>${gp.group}</h4>${gp.items.map(it=>`<a href="${it.u}" target="_blank" rel="noopener"><span class="ic">${it.ic}</span><span class="meta"><b>${it.t}</b><span>${it.d}</span></span><span class="go">↗</span></a>`).join("")}</div>`).join("")}</div>`;
+  const live=`<div class="sec-title"><span class="bar"></span>各隊直播入口 <small>YouTube 應援直播 / 頻道</small></div><div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">LIVE / 頻道</div></div><div class="links"><a href="https://www.youtube.com/results?search_query=${g(t.zh+' live')}" target="_blank" rel="noopener">▶️ 直播搜尋</a><a href="https://www.youtube.com/results?search_query=${g(t.zh)}" target="_blank" rel="noopener">📺 頻道 / 精華</a><a href="https://www.cpbl.com.tw/schedule" target="_blank" rel="noopener">⚾ 今日賽程</a></div></div>`).join("")}</div>`;
+  return src+live;
+}
+function render(){
+  renderTabs();renderLaunch();
+  let html="";
+  if(view==="live") html=renderLive()+renderMembers();
+  else if(view==="sources") html=renderSources();
+  else if(view==="all") html=renderTeamHubs()+renderMembers();
+  else {
+    const t=T(view);
+    html=`<div class="sec-title"><span class="bar"></span>${t.zh} · 即時新聞 <small>每小時自動更新</small></div>`+newsList(FEED&&FEED.news?FEED.news[view]:null);
+    const yt=ytBlock(view); if(yt) html+=`<div class="sec-title"><span class="bar"></span>最新影片 / 直播</div><div class="ytgrid">${yt}</div>`;
+    html+=`<div class="sec-title"><span class="bar"></span>${t.zh} 入口</div><div class="teamgrid"><div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">${t.name}</div><div class="team">所屬球隊 · ${t.team}</div></div><div class="links">${teamLinks(t).map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`).join("")}</div></div></div>`;
+    html+=renderMembers();
+  }
+  $("#view").innerHTML=html;
+  document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openModal(+c.dataset.i));
+}
+function openModal(i){
+  const m=M[i],t=T(m.t),term=`${m.n} ${t.zh}`;
+  const ig=m.ig?`https://www.instagram.com/${m.ig}/`:`https://www.google.com/search?q=${g(m.n+' '+t.zh+' site:instagram.com')}`;
+  const socials=[
+    {em:"📸",l:m.ig?"IG @"+m.ig:"IG貼文",u:ig},
+    {em:"🧵",l:"Threads",u:`https://www.google.com/search?q=${g(m.n+' '+t.zh+' site:threads.net')}`},
+    {em:"📰",l:"新聞",u:`https://news.google.com/search?q=${g(term)}&hl=zh-TW&gl=TW`},
+    {em:"▶️",l:"YouTube",u:`https://www.youtube.com/results?search_query=${g(term)}`},
+    {em:"📘",l:"FB貼文",u:`https://www.google.com/search?q=${g(m.n+' '+t.zh+' site:facebook.com')}`},
+    {em:"💖",l:"百科",u:`https://cheer.showlove.me/?s=${g(m.n)}`},
+  ];
+  $("#modal").innerHTML=`<div class="hero" style="background:${gc(t)}">${initials(m.n)}<button class="x" onclick="closeModal()">✕</button></div><div class="body"><h2>${m.n} ${flag(m.r)}</h2><p class="sub">${t.zh} · ${t.name}</p><p class="tagline">${m.r||'成員'} · 所屬球隊 ${t.team}</p><div class="socials">${socials.map(s=>`<a href="${s.u}" target="_blank" rel="noopener"><span class="em">${s.em}</span>${s.l}</a>`).join("")}</div><p class="note">🔄 名單會隨賽季加入 / 退出 / 轉隊變動。以上連結皆為<b>即時開啟真實來源</b>。${m.ig?'':'※ 此成員 IG 以 Google 即時搜尋帶出,避免帳號變動失效。'}</p></div>`;
+  $("#overlay").classList.add("show");
+}
+function closeModal(){$("#overlay").classList.remove("show");}
+window.closeModal=closeModal;
+$("#overlay").onclick=e=>{if(e.target.id==="overlay")closeModal();};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+$("#q").addEventListener("input",e=>{query=e.target.value;render();});
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&query.trim())openU(PLATFORMS[0].f(query.trim()));});
+$("#foot").innerHTML=`<b>台灣啦啦隊搜尋引擎</b> · 即時新聞 / YouTube 由 GitHub Actions 機器人每小時自動更新。成員名錄為 2026 賽季快照,所有社群按鈕即時連向真實來源。資料來源:Google News、YouTube、ShowLove 女神百科、cpblgirls、CPBL 官方 等。頭像為色塊佔位(非真實照片)。`;
+
+function setUpd(){
+  if(FEED&&FEED.updated){ $("#updtxt").textContent="即時資料 · 更新於 "+timeAgo(FEED.updated); }
+  else { $("#updtxt").textContent="即時資料載入中…"; }
+}
+fetch("data/feed.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(d=>{FEED=d;setUpd();render();})
+  .catch(()=>{setUpd();render();});
+render();
+</script>
+</body>
+</html>
