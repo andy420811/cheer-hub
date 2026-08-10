@@ -28,7 +28,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 抓取新聞與 YouTube
+      - name: 抓取新聞 / YouTube / IG
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python scripts/fetch_feeds.py
 
       - name: Commit 更新

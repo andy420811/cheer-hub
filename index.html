@@ -6,111 +6,184 @@
 <title>台灣啦啦隊搜尋引擎 · CPBL Cheer Hub</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📣</text></svg>">
 <style>
-  :root{
-    --bg:#0c0a14; --panel:#171423; --panel2:#201b31; --line:#2f2942;
-    --text:#f0ecf8; --muted:#a294bb; --accent:#ff4d8d; --accent2:#5cc8ff;
-    --live:#ff3b3b; --radius:16px; --shadow:0 10px 34px rgba(0,0,0,.5);
+  /* ===== 設計 tokens：靛藍(應援)＋金(星)＋球隊色，雙主題 ===== */
+  :root, :root[data-theme="light"]{
+    --bg:#eef0f8; --panel:#ffffff; --panel2:#f1f3fb; --line:#e2e5f1;
+    --text:#171a2e; --muted:#5f688a; --soft:#8b93b2;
+    --accent:#4f57ff; --accent-soft:#ecedff; --gold:#c98700; --live:#e11d48;
+    --header:rgba(255,255,255,.82);
+    --glow1:rgba(79,87,255,.10); --glow2:rgba(255,120,90,.07);
+    --shadow:0 12px 30px rgba(40,44,90,.12); --shadow-sm:0 3px 10px rgba(40,44,90,.08);
+    --on-grad:rgba(255,255,255,.94);
   }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0d1020; --panel:#161a2c; --panel2:#1e2440; --line:#2b3252;
+      --text:#eef0f8; --muted:#98a1c4; --soft:#6f78a0;
+      --accent:#818aff; --accent-soft:#1c2244; --gold:#ffc24d; --live:#ff5069;
+      --header:rgba(13,16,32,.82);
+      --glow1:rgba(99,108,255,.20); --glow2:rgba(255,70,110,.12);
+      --shadow:0 14px 36px rgba(0,0,0,.5); --shadow-sm:0 4px 14px rgba(0,0,0,.4);
+      --on-grad:rgba(255,255,255,.94);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1020; --panel:#161a2c; --panel2:#1e2440; --line:#2b3252;
+    --text:#eef0f8; --muted:#98a1c4; --soft:#6f78a0;
+    --accent:#818aff; --accent-soft:#1c2244; --gold:#ffc24d; --live:#ff5069;
+    --header:rgba(13,16,32,.82);
+    --glow1:rgba(99,108,255,.20); --glow2:rgba(255,70,110,.12);
+    --shadow:0 14px 36px rgba(0,0,0,.5); --shadow-sm:0 4px 14px rgba(0,0,0,.4);
+    --on-grad:rgba(255,255,255,.94);
+  }
+
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
-    font-family:"PingFang TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif;
-    background:radial-gradient(1100px 560px at 85% -12%,#241a4d 0,transparent 55%),
-               radial-gradient(900px 500px at 0% 0%,#3a1533 0,transparent 45%),var(--bg);
+    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif;
+    background:radial-gradient(1100px 560px at 85% -12%,var(--glow1),transparent 55%),
+               radial-gradient(900px 520px at -5% 0%,var(--glow2),transparent 48%),var(--bg);
     color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased;
+    transition:background .35s ease,color .35s ease;
   }
   a{color:inherit;text-decoration:none}
-  header{position:sticky;top:0;z-index:30;background:rgba(12,10,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--soft)}
+
+  header{position:sticky;top:0;z-index:30;background:var(--header);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
   .head-in{max-width:1160px;margin:0 auto;padding:14px 20px}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-  .brand .mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:21px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
-  .brand h1{margin:0;font-size:19px;letter-spacing:.5px}
-  .brand small{display:block;font-size:10.5px;color:var(--muted);letter-spacing:2.5px;font-weight:700}
-  .upd{margin-left:auto;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
-  .upd .live-dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,59,59,.6);animation:pulse 2s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.55)}70%{box-shadow:0 0 0 7px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
-  .search{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+  .brand{display:flex;align-items:center;gap:13px;margin-bottom:13px;flex-wrap:wrap}
+  .brand .mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:linear-gradient(140deg,var(--accent),var(--gold));box-shadow:var(--shadow-sm)}
+  .brand h1{margin:0;font-size:19px;font-weight:800;letter-spacing:.3px}
+  .brand h1 .zh{}
+  .brand small{display:block;font-size:10px;color:var(--soft);letter-spacing:3px;font-weight:800;margin-top:2px}
+  .brand .right{margin-left:auto;display:flex;align-items:center;gap:9px}
+  .upd{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);padding:6px 11px;border-radius:999px;font-variant-numeric:tabular-nums}
+  .upd .live-dot{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .icon-btn{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:17px;cursor:pointer;display:grid;place-items:center;transition:.18s}
+  .icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+
+  .search{display:flex;align-items:center;gap:11px;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow-sm)}
   .search:focus-within{border-color:var(--accent)}
-  .search svg{width:20px;height:20px;fill:var(--muted);flex:none}
+  .search svg{width:20px;height:20px;fill:var(--soft);flex:none}
   .search input{flex:1;background:0;border:0;outline:0;color:var(--text);font-size:16px}
-  .launch{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  .launch button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:.15s}
-  .launch button:hover,.launch button:focus-visible{border-color:var(--accent);transform:translateY(-1px);outline:none}
-  .hint{color:var(--muted);font-size:12px;margin-top:8px}
+  .search input::placeholder{color:var(--soft)}
+  .launch{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+  .launch button{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;transition:.15s}
+  .launch button:hover,.launch button:focus-visible{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);outline:none}
+  .hint{color:var(--muted);font-size:12px;margin-top:9px;line-height:1.5}
+
   main{max-width:1160px;margin:0 auto;padding:20px}
-  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px}
-  .tab{flex:none;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:9px 16px;font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center;white-space:nowrap;transition:.15s}
-  .tab .dot{width:10px;height:10px;border-radius:50%}
-  .tab:hover{color:var(--text)}
-  .tab.active{color:#fff;border-color:transparent}
-  .sec-title{display:flex;align-items:center;gap:10px;margin:26px 2px 14px;font-size:16px;font-weight:800}
-  .sec-title .bar{width:4px;height:18px;border-radius:3px;background:linear-gradient(var(--accent),var(--accent2))}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px}
+  .tab{flex:none;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:11px;padding:9px 15px;font-weight:800;font-size:13.5px;display:flex;gap:8px;align-items:center;white-space:nowrap;transition:.15s}
+  .tab .dot{width:9px;height:9px;border-radius:50%}
+  .tab:hover{color:var(--text);border-color:var(--accent)}
+  .tab.active{color:#fff;border-color:transparent;box-shadow:var(--shadow-sm)}
+
+  .sec-title{display:flex;align-items:baseline;gap:11px;margin:30px 2px 15px;font-size:16.5px;font-weight:800}
+  .sec-title .bar{align-self:center;width:4px;height:19px;border-radius:3px;background:linear-gradient(var(--accent),var(--gold));flex:none}
   .sec-title small{color:var(--muted);font-weight:600;font-size:12px}
-  /* news */
+
   .news{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-  .newsitem{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;transition:.15s}
-  .newsitem:hover{border-color:var(--accent);transform:translateY(-2px)}
-  .newsitem .t{font-weight:700;font-size:14px;line-height:1.45;margin:0 0 8px}
-  .newsitem .m{display:flex;gap:10px;font-size:11.5px;color:var(--muted)}
-  .newsitem .m .src{color:var(--accent2);font-weight:700}
-  /* youtube */
+  .newsitem{display:block;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;transition:.15s;box-shadow:var(--shadow-sm)}
+  .newsitem:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .newsitem .t{font-weight:700;font-size:14px;line-height:1.5;margin:0 0 9px}
+  .newsitem .m{display:flex;gap:10px;font-size:11.5px;color:var(--muted);align-items:center}
+  .newsitem .m .src{color:var(--accent);font-weight:800}
+  .newsitem .m .sep{width:3px;height:3px;border-radius:50%;background:var(--soft)}
+  .newsitem .s{margin:0 0 9px;font-size:12.5px;line-height:1.55;color:var(--muted)}
+  /* inline 搜尋結果面板 */
+  .results{border:1.5px solid var(--accent);border-radius:16px;background:var(--panel);padding:16px;margin-bottom:22px;box-shadow:var(--shadow)}
+  .results .rhead{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .results .rhead b{font-size:15px}
+  .results .rhead .q{color:var(--accent)}
+  .results .rhead .close{margin-left:auto;cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:700}
+  .results .rhead .close:hover{border-color:var(--accent)}
+  .results .rtabs{display:flex;gap:8px;margin-bottom:14px}
+  .results .rtabs button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:800}
+  .results .rtabs button.on{background:linear-gradient(135deg,var(--accent),var(--gold));color:#fff;border-color:transparent}
+  .ytres{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .ythumb{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel2);cursor:pointer;transition:.15s}
+  .ythumb:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .ythumb .thumb{position:relative;aspect-ratio:16/9;background:#000}
+  .ythumb .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .ythumb .thumb .play{position:absolute;inset:0;display:grid;place-items:center;font-size:32px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+  .ythumb .thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ythumb .tt{padding:9px 11px;font-size:12.5px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rloading{color:var(--muted);padding:24px 0;text-align:center}
+
   .ytgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-  .ytcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  .ytcard .cap{display:flex;align-items:center;gap:8px;padding:11px 14px;font-weight:800;font-size:14px}
-  .ytcard .cap .live{font-size:10.5px;font-weight:800;color:#fff;background:var(--live);padding:2px 7px;border-radius:5px;letter-spacing:.5px}
+  .ytcard{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .ytcard .cap{display:flex;align-items:center;gap:8px;padding:12px 15px;font-weight:800;font-size:14px}
+  .ytcard .cap .live{margin-left:auto;font-size:10px;font-weight:800;color:#fff;background:var(--live);padding:3px 8px;border-radius:6px;letter-spacing:1px}
   .ytframe{position:relative;width:100%;aspect-ratio:16/9;background:#000}
   .ytframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .ytcard .row{display:flex;gap:8px;padding:11px 14px}
-  .ytcard .row a{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:8px;border-radius:9px;background:var(--panel2);border:1px solid var(--line)}
-  .ytcard .row a:hover{border-color:var(--accent)}
-  /* teams */
+  .ytcard .row{display:flex;gap:8px;padding:12px 15px}
+  .ytcard .row a{flex:1;text-align:center;font-size:12.5px;font-weight:800;padding:9px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);transition:.14s}
+  .ytcard .row a:hover{border-color:var(--accent);color:var(--accent)}
+  /* IG 最新貼文 */
+  .iggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+  .igcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);transition:.15s}
+  .igcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .igcard .ph{position:relative;aspect-ratio:1;background:var(--panel2)}
+  .igcard .ph::before{content:'📸';position:absolute;inset:0;display:grid;place-items:center;font-size:30px;opacity:.35}
+  .igcard .ph img{position:relative;width:100%;height:100%;object-fit:cover;display:block}
+  .igcard .ph .badge{position:absolute;top:8px;left:8px;z-index:2;background:rgba(0,0,0,.6);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px;backdrop-filter:blur(4px)}
+  .igcard .cap{padding:10px 12px 6px;font-size:12.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .igcard .mt{padding:4px 12px 11px;font-size:11px;color:var(--muted);display:flex;gap:9px;align-items:center;font-variant-numeric:tabular-nums}
+
   .teamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
-  .teamcard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
-  .teamcard .top{padding:18px 18px 14px;position:relative;overflow:hidden}
-  .teamcard .top .emo{position:absolute;right:-8px;bottom:-22px;font-size:96px;opacity:.18}
-  .teamcard .top h3{margin:0;font-size:20px}
-  .teamcard .top .en{font-size:12px;color:rgba(255,255,255,.85);font-weight:700;letter-spacing:1px}
-  .teamcard .top .team{font-size:12.5px;color:rgba(255,255,255,.94);margin-top:6px}
+  .teamcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow-sm)}
+  .teamcard .top{padding:19px 19px 15px;position:relative;overflow:hidden}
+  .teamcard .top .emo{position:absolute;right:-6px;bottom:-26px;font-size:100px;opacity:.2}
+  .teamcard .top h3{margin:0;font-size:20px;color:#fff}
+  .teamcard .top .en{font-size:11px;color:var(--on-grad);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+  .teamcard .top .team{font-size:12.5px;color:var(--on-grad);margin-top:8px}
   .links{display:flex;flex-wrap:wrap;gap:7px;padding:14px}
-  .links a{font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;gap:5px;transition:.15s}
-  .links a:hover{border-color:var(--accent);transform:translateY(-1px)}
-  .count{color:var(--muted);font-size:13px;margin:4px 2px 12px}
+  .links a{font-size:12.5px;font-weight:700;padding:7px 11px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;gap:5px;transition:.15s}
+  .links a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+
+  .count{color:var(--muted);font-size:13px;margin:6px 2px 14px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:.18s;position:relative}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;cursor:pointer;transition:.18s;position:relative;box-shadow:var(--shadow-sm)}
   .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
-  .av{height:120px;display:grid;place-items:center;font-size:34px;font-weight:800;color:#fff;letter-spacing:1px}
-  .card .b{padding:10px 12px}
+  .av{height:118px;display:grid;place-items:center;font-size:34px;font-weight:800;color:#fff;letter-spacing:1px}
+  .card .b{padding:11px 13px}
   .card .n{font-weight:800;font-size:15px;margin:0}
-  .card .r{color:var(--muted);font-size:11.5px;margin:3px 0 0}
-  .flag{position:absolute;top:8px;left:8px;font-size:15px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  .card .r{color:var(--muted);font-size:11.5px;margin:4px 0 0}
+  .flag{position:absolute;top:9px;left:9px;font-size:15px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+
   .srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .srcgroup{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px}
-  .srcgroup h4{margin:0 0 10px;font-size:14px}
-  .srcgroup a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;font-size:13.5px;transition:.12s}
+  .srcgroup{border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:16px;box-shadow:var(--shadow-sm)}
+  .srcgroup h4{margin:0 0 11px;font-size:14px;font-weight:800}
+  .srcgroup a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;font-size:13.5px;transition:.12s}
   .srcgroup a:hover{background:var(--panel2)}
-  .srcgroup a .ic{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:14px;background:var(--panel2);flex:none}
+  .srcgroup a .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:14px;background:var(--panel2);flex:none}
   .srcgroup a .meta{flex:1;min-width:0}
   .srcgroup a .meta b{display:block;font-weight:700}
   .srcgroup a .meta span{font-size:11px;color:var(--muted)}
-  .srcgroup a .go{color:var(--muted);font-size:12px}
-  .empty{text-align:center;color:var(--muted);padding:40px 0}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
+  .srcgroup a .go{color:var(--soft);font-size:13px}
+
+  .empty{text-align:center;color:var(--muted);padding:44px 0;line-height:1.7}
+
+  .overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 40%,rgba(0,0,0,.6));backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
   .overlay.show{display:flex}
-  .modal{width:min(440px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);animation:pop .18s ease}
+  .modal{width:min(440px,100%);background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);animation:pop .18s ease}
   @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
-  @media (prefers-reduced-motion:reduce){.modal{animation:none}.card:hover,.launch button:hover,.links a:hover,.newsitem:hover{transform:none}.upd .live-dot{animation:none}}
-  .modal .hero{height:150px;display:grid;place-items:center;font-size:52px;font-weight:800;color:#fff;position:relative}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card:hover,.newsitem:hover,.links a:hover,.launch button:hover{transform:none}}
+  .modal .hero{height:152px;display:grid;place-items:center;font-size:54px;font-weight:800;color:#fff;position:relative}
   .modal .hero .x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.4);border:0;color:#fff;font-size:17px;cursor:pointer}
-  .modal .body{padding:18px 20px 22px}
-  .modal h2{margin:0 0 2px;font-size:23px}
+  .modal .body{padding:19px 21px 23px}
+  .modal h2{margin:0 0 3px;font-size:23px}
   .modal .sub{color:var(--muted);margin:0 0 4px;font-size:13px}
-  .modal .tagline{color:var(--muted);font-size:12.5px;margin:0 0 16px}
+  .modal .tagline{color:var(--muted);font-size:12.5px;margin:0 0 17px}
   .socials{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-  .socials a{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:11px;background:var(--panel2);border:1px solid var(--line);font-size:13.5px;font-weight:700;transition:.14s}
-  .socials a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .socials a{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:13.5px;font-weight:800;transition:.14s}
+  .socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
   .socials a .em{font-size:16px}
-  .modal .note{margin:14px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5}
-  footer{max-width:1160px;margin:0 auto;padding:10px 20px 44px;color:var(--muted);font-size:12px;line-height:1.7}
+  .modal .note{margin:15px 0 0;font-size:11.5px;color:var(--muted);line-height:1.6}
+
+  footer{max-width:1160px;margin:0 auto;padding:12px 20px 46px;color:var(--muted);font-size:12px;line-height:1.7}
   footer b{color:var(--text)}
 </style>
 </head>
@@ -119,8 +192,11 @@
   <div class="head-in">
     <div class="brand">
       <div class="mark">📣</div>
-      <div><h1>台灣啦啦隊搜尋引擎</h1><small>CPBL CHEER HUB · 即時整合</small></div>
-      <div class="upd" id="upd"><span class="live-dot"></span><span id="updtxt">載入中…</span></div>
+      <div><h1><span class="zh">台灣啦啦隊搜尋引擎</span></h1><small>CPBL CHEER HUB</small></div>
+      <div class="right">
+        <div class="upd" id="upd"><span class="live-dot"></span><span id="updtxt">載入中…</span></div>
+        <button class="icon-btn" id="themeBtn" title="切換主題" aria-label="切換日夜模式">🌙</button>
+      </div>
     </div>
     <div class="search">
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1114 9.5 4.5 4.5 0 019.5 14z"/></svg>
@@ -142,12 +218,12 @@
 
 <script>
 const TEAMS=[
-  {id:"rakuten",name:"Rakuten Girls",zh:"樂天女孩",team:"樂天桃猿",emo:"🐵",color:"#c8102e",grad:["#c8102e","#7a0a1c"],slug:"rakuten-girls"},
-  {id:"fubon",name:"Fubon Angels",zh:"富邦悍將啦啦隊",team:"富邦悍將",emo:"😇",color:"#1552c9",grad:["#1552c9","#0a2a63"],slug:"fubon-angels"},
-  {id:"passion",name:"Passion Sisters",zh:"中信兄弟啦啦隊",team:"中信兄弟",emo:"🐘",color:"#e0a400",grad:["#e0a400","#9a6f00"],slug:"passion-sisters"},
-  {id:"uni",name:"Uni-Girls",zh:"統一獅啦啦隊",team:"統一7-ELEVEn獅",emo:"🦁",color:"#f26522",grad:["#f26522","#b8410f"],slug:"uni-girls"},
-  {id:"dragon",name:"Dragon Beauties",zh:"新光人壽小龍女",team:"味全龍",emo:"🐉",color:"#e4002b",grad:["#e4002b","#8a0019"],slug:"dragon-beauties"},
-  {id:"tsg",name:"Wing Stars",zh:"台鋼雄鷹啦啦隊",team:"台鋼雄鷹",emo:"🦅",color:"#2b3a8c",grad:["#3247a8","#141d44"],slug:"wing-stars"},
+  {id:"rakuten",name:"Rakuten Girls",zh:"樂天女孩",team:"樂天桃猿",emo:"🐵",color:"#c8102e",grad:["#e21b3f","#8a0a1e"],slug:"rakuten-girls"},
+  {id:"fubon",name:"Fubon Angels",zh:"富邦悍將啦啦隊",team:"富邦悍將",emo:"😇",color:"#1552c9",grad:["#2664e0","#0c2f78"],slug:"fubon-angels"},
+  {id:"passion",name:"Passion Sisters",zh:"中信兄弟啦啦隊",team:"中信兄弟",emo:"🐘",color:"#e0a400",grad:["#efb61f","#a06f00"],slug:"passion-sisters"},
+  {id:"uni",name:"Uni-Girls",zh:"統一獅啦啦隊",team:"統一7-ELEVEn獅",emo:"🦁",color:"#f26522",grad:["#ff7a34","#c2450f"],slug:"uni-girls"},
+  {id:"dragon",name:"Dragon Beauties",zh:"新光人壽小龍女",team:"味全龍",emo:"🐉",color:"#e4002b",grad:["#f01d45","#96001c"],slug:"dragon-beauties"},
+  {id:"tsg",name:"Wing Stars",zh:"台鋼雄鷹啦啦隊",team:"台鋼雄鷹",emo:"🦅",color:"#2b3a8c",grad:["#3b4bb0","#161f4c"],slug:"wing-stars"},
 ];
 const M=[
   ["rakuten","曲曲","隊長",""],["rakuten","筠熹","副隊長",""],["rakuten","琳妲","",""],["rakuten","嘎琳","",""],
@@ -198,11 +274,13 @@ const SOURCES=[
   ]},
 ];
 
-let FEED=null, view="live", query="";
+// 部署 Cloudflare Worker 後,點頁尾「設定即時搜尋」貼上網址即可啟用「結果直接顯示在頁面(不轉跳)」
+const WORKER=(localStorage.getItem("cheer-worker")||"").replace(/\/$/,"");
+let FEED=null, view="live", query="", searchResults=null;
 const g=q=>encodeURIComponent(q);
 const $=s=>document.querySelector(s);
 const T=id=>TEAMS.find(x=>x.id===id);
-const gc=t=>`linear-gradient(135deg,${t.grad[0]},${t.grad[1]})`;
+const gc=t=>`linear-gradient(140deg,${t.grad[0]},${t.grad[1]})`;
 const flag=r=>/韓/.test(r)?"🇰🇷":/日/.test(r)?"🇯🇵":"";
 const initials=n=>n.replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()||n.slice(0,1);
 const openU=u=>window.open(u,"_blank","noopener");
@@ -214,6 +292,13 @@ function timeAgo(str){
   if(s<86400) return Math.floor(s/3600)+" 小時前";
   return Math.floor(s/86400)+" 天前";
 }
+
+/* ===== 日夜主題 ===== */
+const root=document.documentElement;
+function effTheme(){return root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}
+function updThemeBtn(){const t=effTheme();$("#themeBtn").textContent=t==="dark"?"☀️":"🌙";$("#themeBtn").title=t==="dark"?"切換淺色模式":"切換深色模式";}
+(function initTheme(){const s=localStorage.getItem("cheer-theme");if(s)root.setAttribute("data-theme",s);})();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(!localStorage.getItem("cheer-theme"))updThemeBtn();});
 
 const PLATFORMS=[
   {k:"news",i:"📰",label:"新聞",f:q=>`https://news.google.com/search?q=${g(q)}&hl=zh-TW&gl=TW`},
@@ -228,8 +313,9 @@ const PLATFORMS=[
 function renderLaunch(){
   $("#launch").innerHTML=PLATFORMS.map(p=>`<button data-k="${p.k}"><span>${p.i}</span>${p.label}</button>`).join("");
   document.querySelectorAll("#launch button").forEach(b=>b.onclick=()=>{
-    const term=query.trim()||"中職 啦啦隊";
-    openU(PLATFORMS.find(x=>x.k===b.dataset.k).f(term));
+    const term=query.trim()||"中職 啦啦隊", k=b.dataset.k;
+    if(WORKER && (k==="news"||k==="yt")){ inlineSearch(k==="yt"?"youtube":"news", term); return; }
+    openU(PLATFORMS.find(x=>x.k===k).f(term));
   });
 }
 function teamLinks(t){return[
@@ -237,40 +323,54 @@ function teamLinks(t){return[
   {t:"🍬 香香百科",u:`https://cpblgirls.tw/`},
   {t:"📰 新聞",u:`https://news.google.com/search?q=${g(t.zh+" "+t.team)}&hl=zh-TW&gl=TW`},
   {t:"▶️ YouTube",u:`https://www.youtube.com/results?search_query=${g(t.zh)}`},
-  {t:"📸 IG",u:`https://www.google.com/search?q=${g(t.zh+" instagram 官方")}`},
-  {t:"📘 FB",u:`https://www.facebook.com/search/top?q=${g(t.zh)}`},
+  {t:"📸 IG",u:`https://www.google.com/search?q=${g(t.zh+" site:instagram.com")}`},
+  {t:"📘 FB",u:`https://www.google.com/search?q=${g(t.zh+" site:facebook.com")}`},
   {t:"🧵 Threads",u:`https://www.threads.net/search?q=${g(t.zh)}`},
   {t:"📅 班表",u:`https://lala.pythings.dev/`},
 ];}
 
 function renderTabs(){
-  const tabs=[{id:"live",zh:"🔴 即時",color:"#ff3b3b"},{id:"all",zh:"全部隊員",color:"#ff4d8d"},...TEAMS,{id:"sources",zh:"資訊源",color:"#5cc8ff"}];
+  const tabs=[{id:"live",zh:"🔴 即時",color:"var(--live)"},{id:"all",zh:"全部隊員",color:"var(--accent)"},...TEAMS,{id:"sources",zh:"資訊源",color:"var(--gold)"}];
   $("#tabs").innerHTML=tabs.map(t=>{
     const a=t.id===view;
-    return `<div class="tab ${a?'active':''}" data-id="${t.id}" style="${a?`background:${t.grad?gc(t):'linear-gradient(135deg,#ff4d8d,#5cc8ff)'};`:''}"><span class="dot" style="background:${t.color||'#888'}"></span>${t.zh||t.name}</div>`;
+    const bg=t.grad?gc(t):"linear-gradient(135deg,var(--accent),var(--gold))";
+    return `<div class="tab ${a?'active':''}" data-id="${t.id}" style="${a?`background:${bg};`:''}"><span class="dot" style="background:${t.color||'var(--soft)'}"></span>${t.zh||t.name}</div>`;
   }).join("");
   document.querySelectorAll(".tab").forEach(el=>el.onclick=()=>{view=el.dataset.id;window.scrollTo(0,0);render();});
 }
 function newsList(items){
   if(!items||!items.length) return `<div class="empty">${FEED?'目前沒有相關新聞':'⏳ 新聞由機器人每小時更新;若剛部署,稍候即會出現。'}</div>`;
   return `<div class="news">${items.map(n=>`<a class="newsitem" href="${esc(n.link)}" target="_blank" rel="noopener">
-    <p class="t">${esc(n.title)}</p><div class="m"><span class="src">${esc(n.source)||'新聞'}</span><span>${timeAgo(n.pub)}</span></div></a>`).join("")}</div>`;
+    <p class="t">${esc(n.title)}</p>${n.summary?`<p class="s">${esc(n.summary)}</p>`:''}<div class="m"><span class="src">${esc(n.source)||'新聞'}</span><span class="sep"></span><span>${timeAgo(n.pub)}</span></div></a>`).join("")}</div>`;
 }
 function ytBlock(tid){
   const y=FEED&&FEED.youtube&&FEED.youtube[tid];
   if(!y||!y.videos||!y.videos.length) return "";
   const t=T(tid), v=y.videos[0];
   return `<div class="ytcard">
-    <div class="cap">${t.emo} ${t.zh} <span class="live">最新</span></div>
+    <div class="cap">${t.emo} ${t.zh}<span class="live">最新</span></div>
     <div class="ytframe"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${v.id}" title="${esc(v.title)}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
     <div class="row"><a href="${y.channelUrl}/streams" target="_blank" rel="noopener">🔴 看直播</a><a href="${y.channelUrl}/videos" target="_blank" rel="noopener">📺 更多影片</a></div>
   </div>`;
+}
+function renderIG(teamId){
+  const ig=FEED&&FEED.instagram; if(!ig||!Object.keys(ig).length) return "";
+  let posts=[];
+  Object.values(ig).forEach(acc=>{ if(teamId&&acc.team!==teamId) return; (acc.posts||[]).forEach(p=>posts.push(Object.assign({name:acc.name,handle:acc.handle},p))); });
+  if(!posts.length) return "";
+  posts.sort((a,b)=> (b.time||"")>(a.time||"")?1:-1);
+  const cards=posts.slice(0,teamId?8:12).map(p=>`<a class="igcard" href="${esc(p.url)}" target="_blank" rel="noopener">
+    <div class="ph">${p.img?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(p.img)}" alt="" onerror="this.style.display='none'">`:''}<span class="badge">@${esc(p.handle)}</span></div>
+    ${p.caption?`<div class="cap">${esc(p.caption)}</div>`:''}
+    <div class="mt"><b style="color:var(--accent)">${esc(p.name)}</b><span>❤ ${p.likes||0}</span><span>${timeAgo(p.time)}</span></div></a>`).join("");
+  return `<div class="sec-title"><span class="bar"></span>📸 IG 最新貼文 <small>Apify 每日更新 · 點圖開原文</small></div><div class="iggrid">${cards}</div>`;
 }
 function renderLive(){
   const news=FEED&&FEED.news?FEED.news.all:null;
   const yts=TEAMS.map(t=>ytBlock(t.id)).filter(Boolean).join("");
   return `<div class="sec-title"><span class="bar"></span>🔴 即時新聞 <small>機器人每小時自動抓取 · 點擊看原文</small></div>
     ${newsList(news)}
+    ${renderIG()}
     ${yts?`<div class="sec-title"><span class="bar"></span>📺 各隊最新影片 / 直播 <small>YouTube 官方頻道</small></div><div class="ytgrid">${yts}</div>`:''}
     <div class="sec-title"><span class="bar"></span>🔎 快速搜尋 <small>把任何關鍵字送到各平台</small></div>
     <div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">${t.name}</div></div><div class="links">${teamLinks(t).slice(0,6).map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`).join("")}</div></div>`).join("")}</div>`;
@@ -302,21 +402,52 @@ function renderSources(){
   const live=`<div class="sec-title"><span class="bar"></span>各隊直播入口 <small>YouTube 應援直播 / 頻道</small></div><div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">LIVE / 頻道</div></div><div class="links"><a href="https://www.youtube.com/results?search_query=${g(t.zh+' live')}" target="_blank" rel="noopener">▶️ 直播搜尋</a><a href="https://www.youtube.com/results?search_query=${g(t.zh)}" target="_blank" rel="noopener">📺 頻道 / 精華</a><a href="https://www.cpbl.com.tw/schedule" target="_blank" rel="noopener">⚾ 今日賽程</a></div></div>`).join("")}</div>`;
   return src+live;
 }
+/* ===== 頁內即時搜尋(透過 Cloudflare Worker,不轉跳) ===== */
+async function inlineSearch(kind, term){
+  searchResults={kind, term, items:null, error:0};
+  window.scrollTo(0,0); render();
+  try{
+    const r=await fetch(`${WORKER}/${kind}?q=`+encodeURIComponent(term));
+    const d=await r.json();
+    if(searchResults && searchResults.term===term){ searchResults.kind=kind; searchResults.items=d.items||[]; render(); }
+  }catch(e){ if(searchResults){ searchResults.items=[]; searchResults.error=1; render(); } }
+}
+function closeResults(){ searchResults=null; render(); }
+function renderResults(){
+  const r=searchResults;
+  const head=`<div class="rhead"><b>頁內搜尋 · <span class="q">${esc(r.term)}</span></b><button class="close" data-close="1">✕ 關閉</button></div>
+    <div class="rtabs"><button data-rk="news" class="${r.kind==='news'?'on':''}">📰 新聞</button><button data-rk="youtube" class="${r.kind==='youtube'?'on':''}">▶️ YouTube</button></div>`;
+  let body;
+  if(r.items===null) body=`<div class="rloading">🔎 搜尋中…</div>`;
+  else if(!r.items.length) body=`<div class="rloading">${r.error?'⚠️ 搜尋失敗,請確認 Worker 網址正確':'沒有結果'}</div>`;
+  else if(r.kind==='news') body=newsList(r.items);
+  else body=`<div class="ytres">${r.items.map(v=>`<div class="ythumb" data-vid="${v.id}"><div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt=""><div class="play">▶</div></div><div class="tt">${esc(v.title)}</div></div>`).join("")}</div>`;
+  return `<div class="results">${head}${body}</div>`;
+}
+function attachResultHandlers(){
+  document.querySelectorAll(".results [data-close]").forEach(b=>b.onclick=closeResults);
+  document.querySelectorAll(".results .rtabs [data-rk]").forEach(b=>b.onclick=()=>inlineSearch(b.dataset.rk, searchResults.term));
+  document.querySelectorAll(".ythumb").forEach(el=>el.onclick=()=>{
+    el.querySelector(".thumb").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${el.dataset.vid}?autoplay=1" title="video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`;
+  });
+}
 function render(){
   renderTabs();renderLaunch();
-  let html="";
-  if(view==="live") html=renderLive()+renderMembers();
-  else if(view==="sources") html=renderSources();
-  else if(view==="all") html=renderTeamHubs()+renderMembers();
+  let html=searchResults?renderResults():"";
+  if(view==="live") html+=renderLive()+renderMembers();
+  else if(view==="sources") html+=renderSources();
+  else if(view==="all") html+=renderTeamHubs()+renderMembers();
   else {
     const t=T(view);
-    html=`<div class="sec-title"><span class="bar"></span>${t.zh} · 即時新聞 <small>每小時自動更新</small></div>`+newsList(FEED&&FEED.news?FEED.news[view]:null);
+    html+=`<div class="sec-title"><span class="bar"></span>${t.zh} · 即時新聞 <small>每小時自動更新</small></div>`+newsList(FEED&&FEED.news?FEED.news[view]:null);
     const yt=ytBlock(view); if(yt) html+=`<div class="sec-title"><span class="bar"></span>最新影片 / 直播</div><div class="ytgrid">${yt}</div>`;
+    html+=renderIG(view);
     html+=`<div class="sec-title"><span class="bar"></span>${t.zh} 入口</div><div class="teamgrid"><div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">${t.name}</div><div class="team">所屬球隊 · ${t.team}</div></div><div class="links">${teamLinks(t).map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`).join("")}</div></div></div>`;
     html+=renderMembers();
   }
   $("#view").innerHTML=html;
   document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openModal(+c.dataset.i));
+  if(searchResults) attachResultHandlers();
 }
 function openModal(i){
   const m=M[i],t=T(m.t),term=`${m.n} ${t.zh}`;
@@ -329,7 +460,7 @@ function openModal(i){
     {em:"📘",l:"FB貼文",u:`https://www.google.com/search?q=${g(m.n+' '+t.zh+' site:facebook.com')}`},
     {em:"💖",l:"百科",u:`https://cheer.showlove.me/?s=${g(m.n)}`},
   ];
-  $("#modal").innerHTML=`<div class="hero" style="background:${gc(t)}">${initials(m.n)}<button class="x" onclick="closeModal()">✕</button></div><div class="body"><h2>${m.n} ${flag(m.r)}</h2><p class="sub">${t.zh} · ${t.name}</p><p class="tagline">${m.r||'成員'} · 所屬球隊 ${t.team}</p><div class="socials">${socials.map(s=>`<a href="${s.u}" target="_blank" rel="noopener"><span class="em">${s.em}</span>${s.l}</a>`).join("")}</div><p class="note">🔄 名單會隨賽季加入 / 退出 / 轉隊變動。以上連結皆為<b>即時開啟真實來源</b>。${m.ig?'':'※ 此成員 IG 以 Google 即時搜尋帶出,避免帳號變動失效。'}</p></div>`;
+  $("#modal").innerHTML=`<div class="hero" style="background:${gc(t)}">${initials(m.n)}<button class="x" onclick="closeModal()">✕</button></div><div class="body"><h2>${m.n} ${flag(m.r)}</h2><p class="sub">${t.zh} · ${t.name}</p><p class="tagline">${m.r||'成員'} · 所屬球隊 ${t.team}</p><div class="socials">${socials.map(s=>`<a href="${s.u}" target="_blank" rel="noopener"><span class="em">${s.em}</span>${s.l}</a>`).join("")}</div><p class="note">🔄 名單會隨賽季加入 / 退出 / 轉隊變動。以上連結皆為<b>即時開啟真實來源</b>。${m.ig?'':'※ 此成員 IG 以 Google site: 精準搜尋帶出,避免帳號變動失效。'}</p></div>`;
   $("#overlay").classList.add("show");
 }
 function closeModal(){$("#overlay").classList.remove("show");}
@@ -337,15 +468,16 @@ window.closeModal=closeModal;
 $("#overlay").onclick=e=>{if(e.target.id==="overlay")closeModal();};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
 $("#q").addEventListener("input",e=>{query=e.target.value;render();});
-$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&query.trim())openU(PLATFORMS[0].f(query.trim()));});
-$("#foot").innerHTML=`<b>台灣啦啦隊搜尋引擎</b> · 即時新聞 / YouTube 由 GitHub Actions 機器人每小時自動更新。成員名錄為 2026 賽季快照,所有社群按鈕即時連向真實來源。資料來源:Google News、YouTube、ShowLove 女神百科、cpblgirls、CPBL 官方 等。頭像為色塊佔位(非真實照片)。`;
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&query.trim()){ if(WORKER) inlineSearch("news",query.trim()); else openU(PLATFORMS[0].f(query.trim())); }});
+window.setWorker=function(){ const cur=localStorage.getItem("cheer-worker")||""; const u=prompt("貼上你的 Cloudflare Worker 網址(啟用頁內即時搜尋),留空可清除:\n例:https://cheer.xxx.workers.dev",cur); if(u!==null){ if(u.trim())localStorage.setItem("cheer-worker",u.trim()); else localStorage.removeItem("cheer-worker"); location.reload(); } };
+$("#themeBtn").onclick=()=>{const next=effTheme()==="dark"?"light":"dark";root.setAttribute("data-theme",next);localStorage.setItem("cheer-theme",next);updThemeBtn();};
+$("#foot").innerHTML=`<b>台灣啦啦隊搜尋引擎</b> · 即時新聞(Bing News,依時間×重要度排序、附摘要)與 YouTube 由機器人每小時自動更新。
+${WORKER?'頁內即時搜尋:<b>已啟用</b> ✅':'<a href="javascript:void(0)" onclick="setWorker()" style="color:var(--accent);font-weight:800">⚙️ 設定即時搜尋(Cloudflare Worker)</a> — 啟用後新聞/YouTube 搜尋結果直接顯示在頁面。'}
+成員名錄為 2026 賽季快照,社群按鈕即時連向真實來源。資料來源:Bing News、YouTube、ShowLove 女神百科、cpblgirls、CPBL 官方 等。頭像為色塊佔位(非真實照片)。`;
 
-function setUpd(){
-  if(FEED&&FEED.updated){ $("#updtxt").textContent="即時資料 · 更新於 "+timeAgo(FEED.updated); }
-  else { $("#updtxt").textContent="即時資料載入中…"; }
-}
-fetch("data/feed.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(d=>{FEED=d;setUpd();render();})
-  .catch(()=>{setUpd();render();});
+function setUpd(){ $("#updtxt").textContent=(FEED&&FEED.updated)?("即時 · 更新於 "+timeAgo(FEED.updated)):"即時資料載入中…"; }
+updThemeBtn();
+fetch("data/feed.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(d=>{FEED=d;setUpd();render();}).catch(()=>{setUpd();render();});
 render();
 </script>
 </body>
