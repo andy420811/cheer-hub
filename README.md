@@ -26,10 +26,20 @@
 ## 為什麼「搜尋」無法自動嵌入 IG/FB/Threads 貼文
 已實測:Google 與 Bing 的**網頁搜尋都會擋伺服器端抓取**(回 consent/空頁),IG/FB/Threads 也沒有讀「別人貼文」的官方 API,爬蟲違反 ToS 且會壞。新聞能自動抓是因為 Bing News 提供**官方 RSS**;社群平台沒有對應的公開feed。可行的替代:官方 embed 指定貼文、或付費第三方 API。
 
-## (選配)Cloudflare Worker — 啟用頁內即時搜尋
-1. 到 https://dash.cloudflare.com → **Workers & Pages → Create → Worker** → 貼上 `worker/worker.js` 內容 → **Deploy**。
-2. 複製 Worker 網址(如 `https://cheer.xxx.workers.dev`)。
-3. 打開網站 → 頁尾點 **⚙️ 設定即時搜尋** → 貼上網址。之後新聞/YouTube 搜尋就 inline 顯示。
+## (選配)垂直搜尋引擎後端 — Cloudflare Worker + KV
+讓搜尋框變成**全文搜尋自建索引**:機器人每次抓的新聞/IG/YouTube 都灌進 KV,累積成可搜尋的資料庫。幾乎全免費(KV 免費額度很大)。
+
+1. **建 Worker**:[dash.cloudflare.com](https://dash.cloudflare.com) → Workers & Pages → **Create → Worker** → 命名(如 `cheer-hub`)→ Deploy → **Edit code** → 貼上 `worker/worker.js` 全部內容 → **Deploy**。
+2. **建 KV 並綁定**:左側 **Storage & Databases → KV → Create**(如 `cheer-index`)。回 Worker → **Settings → Bindings → Add → KV namespace**:Variable name 填 **`INDEX`**、選剛建的 namespace → Save。
+3. **設密碼**:Worker → **Settings → Variables and Secrets → Add**:名稱 **`INGEST_KEY`**、值自訂一組密碼、選 Encrypt → Save。
+4. **複製 Worker 網址**(如 `https://cheer-hub.xxx.workers.dev`)。
+5. **讓機器人餵索引**:GitHub repo → Settings → Secrets and variables → Actions,新增兩個 secret:
+   - **`CHEER_WORKER_URL`** = 你的 Worker 網址
+   - **`INGEST_KEY`** = 跟第 3 步同一組密碼
+6. **前端連上**:打開網站 → 頁尾 **⚙️ 設定即時搜尋** → 貼 Worker 網址。
+7. 到 **Actions** 手動跑一次;之後每小時累積索引,搜尋框打字按 Enter = 全文搜尋整個索引。
+
+> 只想要「新聞/YouTube 即時搜尋」而不建索引也可以:做完 1、4、6 即可(平台按鈕會走即時 `/news`、`/youtube`)。
 
 ## 自動更新是怎麼運作的
 `.github/workflows/update.yml` 每小時執行 `scripts/fetch_feeds.py`,抓取新聞與 YouTube RSS,

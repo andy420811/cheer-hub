@@ -229,6 +229,47 @@ def instagram_posts(token):
     return by
 
 
+def build_docs(feed):
+    """把 feed 攤平成搜尋索引文件。"""
+    docs = []
+    for tid, items in feed.get("news", {}).items():
+        team = "" if tid == "all" else tid
+        for n in items:
+            docs.append({"id": "news:" + n["link"], "type": "news", "team": team,
+                         "title": n["title"], "text": n.get("summary", ""), "url": n["link"],
+                         "time": n.get("pub", ""), "source": n.get("source", "")})
+    for tid, y in feed.get("youtube", {}).items():
+        for v in y.get("videos", []):
+            docs.append({"id": "yt:" + v["id"], "type": "youtube", "team": tid,
+                         "title": v["title"], "text": "", "vid": v["id"],
+                         "url": "https://www.youtube.com/watch?v=" + v["id"],
+                         "time": v.get("pub", ""), "source": "YouTube"})
+    for _, acc in feed.get("instagram", {}).items():
+        for p in acc.get("posts", []):
+            docs.append({"id": "ig:" + p["url"], "type": "ig", "team": acc["team"],
+                         "member": acc["name"], "title": acc["name"] + " · IG",
+                         "text": p.get("caption", ""), "url": p["url"], "image": p.get("img", ""),
+                         "time": p.get("time", ""), "source": "Instagram"})
+    return docs
+
+
+def push_to_index(docs):
+    """把文件灌進 Cloudflare Worker 的累積索引(需 CHEER_WORKER_URL + INGEST_KEY)。"""
+    url = os.environ.get("CHEER_WORKER_URL", "").strip().rstrip("/")
+    key = os.environ.get("INGEST_KEY", "").strip()
+    if not url or not key:
+        print("索引:未設定 CHEER_WORKER_URL / INGEST_KEY(略過)")
+        return
+    try:
+        req = urllib.request.Request(url + "/ingest", data=json.dumps({"docs": docs}).encode(),
+                                     headers={"Content-Type": "application/json", "x-ingest-key": key,
+                                              "User-Agent": UA}, method="POST")
+        with urllib.request.urlopen(req, timeout=30) as r:
+            print("索引:", r.read().decode("utf-8", "replace")[:120])
+    except Exception as e:
+        print(f"索引 push 失敗: {e}", file=sys.stderr)
+
+
 def main():
     now = datetime.now(timezone.utc)
     old = {}
@@ -275,6 +316,8 @@ def main():
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(feed, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"已寫入 {OUT}")
+
+    push_to_index(build_docs(feed))
 
 
 if __name__ == "__main__":

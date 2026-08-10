@@ -110,7 +110,17 @@
   .ythumb .thumb .play{position:absolute;inset:0;display:grid;place-items:center;font-size:32px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
   .ythumb .thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .ythumb .tt{padding:9px 11px;font-size:12.5px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .rloading{color:var(--muted);padding:24px 0;text-align:center}
+  .rloading{color:var(--muted);padding:24px 0;text-align:center;line-height:1.6}
+  .rlist{display:flex;flex-direction:column;gap:10px}
+  .ritem{display:flex;gap:13px;padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);transition:.14s}
+  .ritem:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .rt{flex:none;width:104px;height:64px;border-radius:9px;overflow:hidden;background:var(--panel);display:grid;place-items:center;font-size:22px}
+  .rt img{width:100%;height:100%;object-fit:cover}
+  .rb{min-width:0}
+  .rtitle{font-weight:800;font-size:14px;line-height:1.4;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rsnip{font-size:12.5px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
+  .rmeta{display:flex;gap:9px;align-items:center;font-size:11px;color:var(--muted);flex-wrap:wrap;font-variant-numeric:tabular-nums}
+  .rbadge{font-weight:800;color:var(--accent)}
 
   .ytgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
   .ytcard{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:var(--shadow-sm)}
@@ -402,34 +412,41 @@ function renderSources(){
   const live=`<div class="sec-title"><span class="bar"></span>各隊直播入口 <small>YouTube 應援直播 / 頻道</small></div><div class="teamgrid">${TEAMS.map(t=>`<div class="teamcard"><div class="top" style="background:${gc(t)}"><div class="emo">${t.emo}</div><h3>${t.zh}</h3><div class="en">LIVE / 頻道</div></div><div class="links"><a href="https://www.youtube.com/results?search_query=${g(t.zh+' live')}" target="_blank" rel="noopener">▶️ 直播搜尋</a><a href="https://www.youtube.com/results?search_query=${g(t.zh)}" target="_blank" rel="noopener">📺 頻道 / 精華</a><a href="https://www.cpbl.com.tw/schedule" target="_blank" rel="noopener">⚾ 今日賽程</a></div></div>`).join("")}</div>`;
   return src+live;
 }
-/* ===== 頁內即時搜尋(透過 Cloudflare Worker,不轉跳) ===== */
-async function inlineSearch(kind, term){
-  searchResults={kind, term, items:null, error:0};
+/* ===== 頁內搜尋:索引全文(/search)+ 即時(/news、/youtube) ===== */
+async function inlineSearch(source, term, type){
+  searchResults={source, term, type:type||"", items:null, error:0};
   window.scrollTo(0,0); render();
+  const path = source==='index'
+    ? `/search?q=${encodeURIComponent(term)}${type?`&type=${type}`:''}`
+    : `/${source}?q=${encodeURIComponent(term)}`;
   try{
-    const r=await fetch(`${WORKER}/${kind}?q=`+encodeURIComponent(term));
-    const d=await r.json();
-    if(searchResults && searchResults.term===term){ searchResults.kind=kind; searchResults.items=d.items||[]; render(); }
+    const r=await fetch(WORKER+path); const d=await r.json();
+    if(searchResults && searchResults.term===term){ searchResults.items=d.items||[]; render(); }
   }catch(e){ if(searchResults){ searchResults.items=[]; searchResults.error=1; render(); } }
 }
 function closeResults(){ searchResults=null; render(); }
+function resultItem(d){
+  const badge=d.type==='news'?'📰 新聞':d.type==='ig'?'📸 IG':d.type==='youtube'?'▶️ 影片':'🔗 連結';
+  const thumb=(d.type==='youtube'&&d.vid)?`https://i.ytimg.com/vi/${d.vid}/mqdefault.jpg`:((d.type==='ig'&&d.image)?d.image:'');
+  return `<a class="ritem" href="${esc(d.url)}" target="_blank" rel="noopener">
+    ${thumb?`<div class="rt"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(thumb)}" alt="" onerror="this.style.display='none'"></div>`:`<div class="rt">${badge.split(' ')[0]}</div>`}
+    <div class="rb"><div class="rtitle">${esc(d.title)}</div>${d.text?`<div class="rsnip">${esc(d.text)}</div>`:''}
+    <div class="rmeta"><span class="rbadge">${badge}</span>${d.member?`<span>${esc(d.member)}</span>`:''}${d.source?`<span>${esc(d.source)}</span>`:''}${d.time&&timeAgo(d.time)?`<span>${timeAgo(d.time)}</span>`:''}</div></div></a>`;
+}
 function renderResults(){
-  const r=searchResults;
-  const head=`<div class="rhead"><b>頁內搜尋 · <span class="q">${esc(r.term)}</span></b><button class="close" data-close="1">✕ 關閉</button></div>
-    <div class="rtabs"><button data-rk="news" class="${r.kind==='news'?'on':''}">📰 新聞</button><button data-rk="youtube" class="${r.kind==='youtube'?'on':''}">▶️ YouTube</button></div>`;
+  const r=searchResults, idx=r.source==='index';
+  const label=idx?'🔎 索引搜尋':(r.source==='news'?'📰 即時新聞':'▶️ 即時 YouTube');
+  const tabs=idx?`<div class="rtabs">${[['','全部'],['news','📰 新聞'],['ig','📸 IG'],['youtube','▶️ 影片']].map(([v,t])=>`<button data-type="${v}" class="${(r.type||'')===v?'on':''}">${t}</button>`).join("")}</div>`:'';
+  const head=`<div class="rhead"><b>${label} · <span class="q">${esc(r.term)}</span></b><button class="close" data-close="1">✕ 關閉</button></div>${tabs}`;
   let body;
   if(r.items===null) body=`<div class="rloading">🔎 搜尋中…</div>`;
-  else if(!r.items.length) body=`<div class="rloading">${r.error?'⚠️ 搜尋失敗,請確認 Worker 網址正確':'沒有結果'}</div>`;
-  else if(r.kind==='news') body=newsList(r.items);
-  else body=`<div class="ytres">${r.items.map(v=>`<div class="ythumb" data-vid="${v.id}"><div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt=""><div class="play">▶</div></div><div class="tt">${esc(v.title)}</div></div>`).join("")}</div>`;
+  else if(!r.items.length) body=`<div class="rloading">${r.error?'⚠️ 搜尋失敗,請確認 Worker 網址與 KV 綁定':(idx?'索引裡還沒有相符結果<br><small>機器人每次執行會累積更多,過幾輪就會變豐富</small>':'沒有結果')}</div>`;
+  else body=`<div class="rlist">${r.items.map(resultItem).join("")}</div>`;
   return `<div class="results">${head}${body}</div>`;
 }
 function attachResultHandlers(){
   document.querySelectorAll(".results [data-close]").forEach(b=>b.onclick=closeResults);
-  document.querySelectorAll(".results .rtabs [data-rk]").forEach(b=>b.onclick=()=>inlineSearch(b.dataset.rk, searchResults.term));
-  document.querySelectorAll(".ythumb").forEach(el=>el.onclick=()=>{
-    el.querySelector(".thumb").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${el.dataset.vid}?autoplay=1" title="video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`;
-  });
+  document.querySelectorAll(".results .rtabs [data-type]").forEach(b=>b.onclick=()=>inlineSearch("index", searchResults.term, b.dataset.type));
 }
 function render(){
   renderTabs();renderLaunch();
@@ -468,7 +485,7 @@ window.closeModal=closeModal;
 $("#overlay").onclick=e=>{if(e.target.id==="overlay")closeModal();};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
 $("#q").addEventListener("input",e=>{query=e.target.value;render();});
-$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&query.trim()){ if(WORKER) inlineSearch("news",query.trim()); else openU(PLATFORMS[0].f(query.trim())); }});
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&query.trim()){ if(WORKER) inlineSearch("index",query.trim()); else openU(PLATFORMS[0].f(query.trim())); }});
 window.setWorker=function(){ const cur=localStorage.getItem("cheer-worker")||""; const u=prompt("貼上你的 Cloudflare Worker 網址(啟用頁內即時搜尋),留空可清除:\n例:https://cheer.xxx.workers.dev",cur); if(u!==null){ if(u.trim())localStorage.setItem("cheer-worker",u.trim()); else localStorage.removeItem("cheer-worker"); location.reload(); } };
 $("#themeBtn").onclick=()=>{const next=effTheme()==="dark"?"light":"dark";root.setAttribute("data-theme",next);localStorage.setItem("cheer-theme",next);updThemeBtn();};
 $("#foot").innerHTML=`<b>台灣啦啦隊搜尋引擎</b> · 即時新聞(Bing News,依時間×重要度排序、附摘要)與 YouTube 由機器人每小時自動更新。

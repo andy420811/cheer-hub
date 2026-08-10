@@ -28,9 +28,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 抓取新聞 / YouTube / IG
+      - name: 抓取新聞 / YouTube / IG(並灌進搜尋索引)
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          CHEER_WORKER_URL: ${{ secrets.CHEER_WORKER_URL }}
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
         run: python scripts/fetch_feeds.py
 
       - name: Commit 更新
