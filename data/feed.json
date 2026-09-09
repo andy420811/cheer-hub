@@ -1,165 +1,197 @@
 {
- "updated": "2026-09-09T03:39:26+00:00",
+ "updated": "2026-09-09T08:46:14+00:00",
  "news": {
-  "all": [
-   {
-    "title": "中華職棒》伍鐸達成生涯1300局投球成中職第7人 下一步瞄準陽建福",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4eeb4f34246b30a10251428e367&url=https%3a%2f%2ftw.sports.yahoo.com%2fnews%2f%25E4%25B8%25AD%25E8%258F%25AF%25E8%2581%25B7%25E6%25A3%2592%25E3%2580%258B%25E4%25BC%258D%25E9%2590%25B8%25E9%2581%2594%25E6%2588%2590%25E7%2594%259F%25E6%25B6%25AF1300%25E5%25B1%2580%25E6%258A%2595%25E7%2590%2583%25E6%2588%2590%25E4%25B8%25AD%25E8%2581%25B7%25E7%25AC%25AC7%25E4%25BA%25BA-%25E4%25B8%258B%25E4%25B8%2580%25E6%25AD%25A5%25E7%259E%2584%25E6%25BA%2596%25E9%2599%25BD%25E5%25BB%25BA%25E7%25A6%258F-121408471.html&c=17294178014780686557&mkt=zh-tw",
-    "source": "",
-    "pub": "Tue, 08 Sep 2026 05:14:00 GMT",
-    "summary": "現年39歲的伍鐸，生涯12個球季繳出3.59防禦率，累積80勝、74敗、23次救援成功及6次中繼成功（截至2026年9月8日賽前），是味全龍相當倚重的投手…",
-    "score": 12.1
-   },
-   {
-    "title": "富邦悍將啦啦隊安娜達成悍將中學校花三連霸！她暖心將選票化成公益捐出 6 萬多元助孩童追棒球夢",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4eeb4f34246b30a10251428e367&url=https%3a%2f%2fwww.ttshow.tw%2farticle%2f113962&c=6182223402411151629&mkt=zh-tw",
-    "source": "",
-    "pub": "Sun, 06 Sep 2026 17:00:00 GMT",
-    "summary": "中華職棒富邦悍將啦啦隊（Fubon Angels）人氣成員安娜，在備受矚目的年度主題活動「悍將中學」第四屆校花選拔中，以驚人的 121,248 票風光拿下…",
-    "score": 9.1
-   }
-  ],
-  "rakuten": [
-   {
-    "title": "體壇》挺全民運！桃市府樂天桃猿主題候車亭啟用",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ee96ef4acbb0753dc3583f11b6&url=https%3a%2f%2ftsna.com%2farticle%2f202288&c=11994618667610622953&mkt=zh-tw",
-    "source": "",
-    "pub": "Sat, 05 Sep 2026 04:05:00 GMT",
-    "summary": "115年全民運動會將於10月17日至22日在桃園登場，桃園市政府昨在市府前廣場舉辦「做伙挺全民運－樂天桃猿候車亭啟用記者會」。市長張善政表示，府前全新樂天…",
-    "score": 6.0
-   },
-   {
-    "title": "樂天女孩穎樂、笑笑解鎖「第一次」 進軍日本絕美寫真登場！",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ee96ef4acbb0753dc3583f11b6&url=https%3a%2f%2fstar.setn.com%2fnews%2f1900335&c=12220040680220766126&mkt=zh-tw",
-    "source": "",
-    "pub": "Wed, 02 Sep 2026 08:24:00 GMT",
-    "summary": "日本知名《週刊YOUNG MAGAZINE》（講談社）舉辦的「YANMANGA杯」，選拔中脫穎而出的前四名樂天女孩穎樂、高橋佳帆、溫妮與笑笑，受邀前往日本…",
-    "score": 2.4
-   }
-  ],
+  "all": [],
+  "rakuten": [],
   "fubon": [
    {
     "title": "安全守備不漏接! 北市警向Fubon Angels傳授防身應變術",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2fnews.pchome.com.tw%2fpublic%2ftaipei%2f20260908%2findex-78886022062336126016.html&c=12247696874487589692&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2fnews.pchome.com.tw%2fpublic%2ftaipei%2f20260908%2findex-78886022062336126016.html&c=12247696874487589692&mkt=zh-tw",
     "source": "",
     "pub": "Tue, 08 Sep 2026 10:37:00 GMT",
     "summary": "為強化跟蹤騷擾防制及人身安全觀念，臺北市政府警察局日前前進富邦悍將，向Fubon Angels棒球球團啦啦隊成員進行跟騷防制及防身安全宣導，透過案例說明與…",
-    "score": 12.6
+    "score": 12.2
    },
    {
     "title": "獨家／丹丹爆肌腱斷裂！不想缺席「悍將中學」仍應援 醫生曝嚴重後遺症",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2fstar.setn.com%2fnews%2f1903178&c=10247980570042017133&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2fstar.setn.com%2fnews%2f1903178&c=10247980570042017133&mkt=zh-tw",
     "source": "",
     "pub": "Mon, 07 Sep 2026 15:11:00 GMT",
     "summary": "富邦悍將啦啦隊Fubon Angels人氣成員丹丹，日前驚傳練舞時不慎受傷，經醫師診斷為後側肌腱部分斷裂，需休養6至8週。儘管傷勢嚴重，丹丹仍堅持參與「悍…",
-    "score": 12.0
-   },
-   {
-    "title": "李珠珢學生制服應援片 4秒熱舞震暈3萬網",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2fstar.setn.com%2fnews%2f1902981&c=18183015446652143645&mkt=zh-tw",
-    "source": "",
-    "pub": "Mon, 07 Sep 2026 09:43:00 GMT",
-    "summary": "韓籍啦啦隊「AI女神」李珠珢加盟富邦悍將後人氣居高不下，今（7）日無預警於IG釋出一段4秒應援短片，畫面中她穿著「悍將中學」青春制服，坐在地板上隨著音樂節…",
     "score": 11.5
    },
    {
+    "title": "李珠珢學生制服應援片 4秒熱舞震暈3萬網",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2fstar.setn.com%2fnews%2f1902981&c=18183015446652143645&mkt=zh-tw",
+    "source": "",
+    "pub": "Mon, 07 Sep 2026 09:43:00 GMT",
+    "summary": "韓籍啦啦隊「AI女神」李珠珢加盟富邦悍將後人氣居高不下，今（7）日無預警於IG釋出一段4秒應援短片，畫面中她穿著「悍將中學」青春制服，坐在地板上隨著音樂節…",
+    "score": 11.1
+   },
+   {
     "title": "李珠珢穿學生服大力震胸2下！影片只有4秒卻讓3萬人淪陷：不行了",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2fwww.nownews.com%2fnews%2f6872928&c=7230719802384264161&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2fwww.nownews.com%2fnews%2f6872928&c=7230719802384264161&mkt=zh-tw",
     "source": "",
     "pub": "Mon, 07 Sep 2026 06:42:00 GMT",
     "summary": "富邦悍將隊啦啦隊Fubon Angels韓籍成員李珠珢來台發展1年半，人氣居高不下，她今（7）日在IG上傳一支只有4秒鐘的應援短片，只見女神穿著學生制服，…",
-    "score": 10.3
+    "score": 9.8
    },
    {
     "title": "影／李雅英同框富邦悍將吉祥物！「現場教學」魔性互動萌翻全場球迷",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2ftw.news.yahoo.com%2f%25E5%25BD%25B1-%25E6%259D%258E%25E9%259B%2585%25E8%258B%25B1%25E5%2590%258C%25E6%25A1%2586%25E5%25AF%258C%25E9%2582%25A6%25E6%2582%258D%25E5%25B0%2587%25E5%2590%2589%25E7%25A5%25A5%25E7%2589%25A9-%25E7%258F%25BE%25E5%25A0%25B4%25E6%2595%2599%25E5%25AD%25B8-%25E9%25AD%2594%25E6%2580%25A7%25E4%25BA%2592%25E5%258B%2595%25E8%2590%258C%25E7%25BF%25BB%25E5%2585%25A8%25E5%25A0%25B4%25E7%2590%2583%25E8%25BF%25B7-090300778.html&c=6110356652480834655&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2ftw.news.yahoo.com%2f%25E5%25BD%25B1-%25E6%259D%258E%25E9%259B%2585%25E8%258B%25B1%25E5%2590%258C%25E6%25A1%2586%25E5%25AF%258C%25E9%2582%25A6%25E6%2582%258D%25E5%25B0%2587%25E5%2590%2589%25E7%25A5%25A5%25E7%2589%25A9-%25E7%258F%25BE%25E5%25A0%25B4%25E6%2595%2599%25E5%25AD%25B8-%25E9%25AD%2594%25E6%2580%25A7%25E4%25BA%2592%25E5%258B%2595%25E8%2590%258C%25E7%25BF%25BB%25E5%2585%25A8%25E5%25A0%25B4%25E7%2590%2583%25E8%25BF%25B7-090300778.html&c=6110356652480834655&mkt=zh-tw",
     "source": "",
     "pub": "Mon, 07 Sep 2026 02:03:00 GMT",
     "summary": "富邦悍將啦啦隊「Fubon Angels」韓籍人氣成員李雅英，近日與富邦悍將吉祥物「富藍奇」同框，兩人可愛互動畫面曝光！這次不是啦啦隊教學，反而是由富藍奇…",
-    "score": 9.9
+    "score": 9.4
    },
    {
     "title": "富邦悍將啦啦隊安娜達成悍將中學校花三連霸！她暖心將選票化成公益捐出 6 萬多元助孩童追棒球夢",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef33824c9282b55b635b510176&url=https%3a%2f%2fwww.ttshow.tw%2farticle%2f113962&c=6182223402411151629&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd621944660971f81545a6f50b7&url=https%3a%2f%2fwww.ttshow.tw%2farticle%2f113962&c=6182223402411151629&mkt=zh-tw",
     "source": "",
     "pub": "Sun, 06 Sep 2026 17:00:00 GMT",
     "summary": "中華職棒富邦悍將啦啦隊（Fubon Angels）人氣成員安娜，在備受矚目的年度主題活動「悍將中學」第四屆校花選拔中，以驚人的 121,248 票風光拿下…",
-    "score": 9.1
+    "score": 8.7
    }
   ],
   "passion": [
    {
-    "title": "中職》中信兄弟大巨蛋最終系列戰！短今首秀SOLO、SAYA久違回歸炒熱中場 還有邊荷律及金渡兒",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef983a48668ccb5619a78ccfcc&url=https%3a%2f%2ftw.sports.yahoo.com%2fnews%2f%25E4%25B8%25AD%25E8%2581%25B7-%25E4%25B8%25AD%25E4%25BF%25A1%25E5%2585%2584%25E5%25BC%259F%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%25E6%259C%2580%25E7%25B5%2582%25E7%25B3%25BB%25E5%2588%2597%25E6%2588%25B0-%25E7%259F%25AD%25E4%25BB%258A%25E9%25A6%2596%25E7%25A7%2580solo-saya%25E4%25B9%2585%25E9%2581%2595%25E5%259B%259E%25E6%25AD%25B8%25E7%2582%2592%25E7%2586%25B1%25E4%25B8%25AD%25E5%25A0%25B4-%25E9%2582%2584%25E6%259C%2589%25E9%2582%258A%25E8%258D%25B7%25E5%25BE%258B%25E5%258F%258A%25E9%2587%2591%25E6%25B8%25A1%25E5%2585%2592-121149972.html&c=1385152522855671971&mkt=zh-tw",
+    "title": "中職／兄弟邀請南韓啦啦隊夢幻同台 加入PS韓籍女孩應援行列",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2fudn.com%2fnews%2fstory%2f7001%2f9743578&c=11763809683819242636&mkt=zh-tw",
     "source": "",
-    "pub": "Tue, 08 Sep 2026 05:11:00 GMT",
-    "summary": "此次中場表演陣容相當豐富，人氣成員「短今」將迎來大巨蛋SOLO舞台初登場，首次挑戰個人演出，勢必成為球迷關注焦點；多才多藝的「怡琪」則繼今年6月後，再度登…",
-    "score": 15.1
+    "pub": "Tue, 08 Sep 2026 15:18:00 GMT",
+    "summary": "中信兄弟隊今天宣布，將於17日與駐台北韓國代表部攜手合作，在台北大巨蛋主場舉辦韓國文化交流活動。當天賽前不僅規劃多元精彩的韓國文化交流匯演，更邀請駐台北韓…",
+    "score": 14.5
    },
    {
-    "title": "金渡兒黑蕾絲造型曝光 傲人好身材不藏了！親洩「生命密碼」",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef983a48668ccb5619a78ccfcc&url=https%3a%2f%2fstar.setn.com%2fnews%2f1903794&c=3854188490468443433&mkt=zh-tw",
+    "title": "中信兄弟攜手駐臺北韓國代表部 韓職啦啦隊登大巨蛋",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2fwww.msn.com%2fzh-tw%2fsports%2f%25E4%25B8%2580%25E8%2588%25AC%2f%25E4%25B8%25AD%25E4%25BF%25A1%25E5%2585%2584%25E5%25BC%259F%25E6%2594%259C%25E6%2589%258B%25E9%25A7%2590%25E8%2587%25BA%25E5%258C%2597%25E9%259F%2593%25E5%259C%258B%25E4%25BB%25A3%25E8%25A1%25A8%25E9%2583%25A8-%25E9%259F%2593%25E8%2581%25B7%25E5%2595%25A6%25E5%2595%25A6%25E9%259A%258A%25E7%2599%25BB%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%2far-AA2bRyNR&c=15496667956950237933&mkt=zh-tw",
     "source": "",
-    "pub": "Tue, 08 Sep 2026 14:58:00 GMT",
-    "summary": "中信兄弟啦啦隊Passion Sisters成員金渡兒（Kim Do-A），因甜美外型與精湛應援舞技被封為「仁川女神」。適逢9月9日，金渡兒特別選在象徵其…",
-    "score": 12.9
+    "pub": "Tue, 08 Sep 2026 23:47:00 GMT",
+    "summary": "記者陳正雄／臺北報導 中信兄弟隊今（9）日宣布，將於本月17日與駐臺北韓國代表部攜手合作，在臺北大巨蛋主場舉辦韓國文化交流活動。當天賽前不僅規劃多元精采的…",
+    "score": 13.3
    },
    {
-    "title": "遭酸又老又笨呆！還被問「是不是生過小孩」 短今高EQ回應了",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef983a48668ccb5619a78ccfcc&url=https%3a%2f%2fwww.ctwant.com%2farticle%2f497033%2f&c=4795645060884843778&mkt=zh-tw",
+    "title": "SSG啦啦隊要來了!中信兄弟17日大巨蛋吹韓流同場TripleS Nien",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2fwww.msn.com%2fzh-tw%2fnews%2fother%2fssg%25E5%2595%25A6%25E5%2595%25A6%25E9%259A%258A%25E8%25A6%2581%25E4%25BE%2586%25E4%25BA%2586%25E4%25B8%25AD%25E4%25BF%25A1%25E5%2585%2584%25E5%25BC%259F17%25E6%2597%25A5%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%25E5%2590%25B9%25E9%259F%2593%25E6%25B5%2581%25E5%2590%258C%25E5%25A0%25B4triples-nien%2far-AA2bQn4D&c=8496890619505477057&mkt=zh-tw",
     "source": "",
-    "pub": "Tue, 08 Sep 2026 08:21:00 GMT",
-    "summary": "中信兄弟啦啦隊「Passion Sisters」成員短今（胡馨儀），以直率個性與親民形象吸引大批粉絲支持，沒想到近日她上完節目《天才衝衝衝》後，被網友謾罵…",
-    "score": 12.4
+    "pub": "Tue, 08 Sep 2026 21:06:00 GMT",
+    "summary": "▲▼中信兄弟與SSG登陸者交流。（圖／中信兄弟） 記者楊舒帆／綜合報導 中信兄弟將於9月17日攜手駐台北韓國代表部，在台北大巨蛋主場舉辦韓國文化交流活動，…",
+    "score": 13.0
    },
    {
-    "title": "專訪／貴貴看著PS女孩從「試水溫」到邁向國際 13季青春都在球場",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef983a48668ccb5619a78ccfcc&url=https%3a%2f%2fwww.msn.com%2fzh-tw%2fsports%2fbaseball%2f%25E5%25B0%2588%25E8%25A8%25AA-%25E8%25B2%25B4%25E8%25B2%25B4%25E7%259C%258B%25E8%2591%2597ps%25E5%25A5%25B3%25E5%25AD%25A9%25E5%25BE%259E-%25E8%25A9%25A6%25E6%25B0%25B4%25E6%25BA%25AB-%25E5%2588%25B0%25E9%2582%2581%25E5%2590%2591%25E5%259C%258B%25E9%259A%259B-13%25E5%25AD%25A3%25E9%259D%2592%25E6%2598%25A5%25E9%2583%25BD%25E5%259C%25A8%25E7%2590%2583%25E5%25A0%25B4%2far-AA2bDK33&c=907251737176016460&mkt=zh-tw",
+    "title": "「仁川女神」金渡兒尺度解禁！比基尼辣照連發超擦邊 粉暴動：每張都愛",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2fstar.setn.com%2fnews%2f1904182&c=2276921587353438986&mkt=zh-tw",
     "source": "",
-    "pub": "Sun, 06 Sep 2026 02:00:00 GMT",
-    "summary": "▲貴貴昨（4日）在洲際球場開場舞站C位。（圖／貴貴本人提供） 記者胡冠辰／台中報導 中信兄弟啦啦隊Passion Sisters成員貴貴從2014年創隊第…",
-    "score": 7.9
+    "pub": "Tue, 08 Sep 2026 18:54:00 GMT",
+    "summary": "中信兄弟啦啦隊Passion Sisters成員金渡兒，憑藉甜美外型與精湛應援實力獲封「仁川女神」，人氣居高不下。近日她為宣傳個人實體影像紀實書籍《想與你…",
+    "score": 12.8
    },
    {
-    "title": "Passion Sisters汶汶遭割頸休養3個月！IG曬9/27活動預告喊：偶回來惹",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef983a48668ccb5619a78ccfcc&url=https%3a%2f%2fstars.udn.com%2fstar%2fstory%2f120661%2f9736096&c=1612346384161499481&mkt=zh-tw",
+    "title": "仁川女神尺度解禁！比基尼辣照連發超擦邊",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2fwww.mirrormedia.mg%2fexternal%2fsetn_1904182&c=10359965920217728524&mkt=zh-tw",
     "source": "",
-    "pub": "Sat, 05 Sep 2026 04:16:00 GMT",
-    "summary": "中信兄弟啦啦隊「Passion Sisters」成員汶汶今年6月驚傳遭狂粉持刀割頸砍傷，引發外界高度關注。歷經休養後，汶汶於9月4日在IG限時動態發文「偶…",
-    "score": 6.1
+    "pub": "Tue, 08 Sep 2026 18:54:00 GMT",
+    "summary": "中信兄弟啦啦隊Passion Sisters成員金渡兒，憑藉甜美外型與精湛應援實力獲封「仁川女神」，人氣居高不下。近日她為宣傳個人實體影像紀實書籍《想與你…",
+    "score": 12.8
+   },
+   {
+    "title": "中職》中信兄弟9/17大巨蛋打造韓國之夜 女團tripleS Nien、韓職SSG啦啦隊及韓國頂級跆拳道演出",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd62e6045a3b301519ef7686e3b&url=https%3a%2f%2ftw.sports.yahoo.com%2fnews%2f%25E4%25B8%25AD%25E8%2581%25B7-%25E4%25B8%25AD%25E4%25BF%25A1%25E5%2585%2584%25E5%25BC%259F9-17%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%25E6%2589%2593%25E9%2580%25A0%25E9%259F%2593%25E5%259C%258B%25E4%25B9%258B%25E5%25A4%259C-%25E5%25A5%25B3%25E5%259C%2598triples-nien-043258905.html&c=4622138394647866805&mkt=zh-tw",
+    "source": "",
+    "pub": "Tue, 08 Sep 2026 17:01:00 GMT",
+    "summary": "中信兄弟將於9月17日在台北大巨蛋主場與駐台北韓國代表部合作舉辦韓國文化交流活動，賽前將集結韓國頂級跆拳道、超人氣女團tripleS成員Nien亮相，以及…",
+    "score": 12.7
    }
   ],
-  "uni": [
-   {
-    "title": "統一獅》陳鏞基引退賽19、20日亞太登場！ 兩場預售近3萬張",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4efe37e48f29a5ee68540b7d345&url=https%3a%2f%2ftw.news.yahoo.com%2f%25E7%25B5%25B1-%25E7%258D%2585-%25E9%2599%25B3%25E9%258F%259E%25E5%259F%25BA%25E5%25BC%2595%25E9%2580%2580%25E8%25B3%25BD19-20%25E6%2597%25A5%25E4%25BA%259E%25E5%25A4%25AA%25E7%2599%25BB%25E5%25A0%25B4-%25E5%2585%25A9%25E5%25A0%25B4%25E9%25A0%2590%25E5%2594%25AE%25E8%25BF%25913%25E8%2590%25AC%25E5%25BC%25B5-030911683.html&c=14910936868762160171&mkt=zh-tw",
-    "source": "",
-    "pub": "Sun, 06 Sep 2026 17:00:00 GMT",
-    "summary": "統一7-ELEVEN獅陳鏞基即將迎來職業球員生涯的重要時刻，球團特別推出「鏞不止步」引退系列最終回視覺，以「傳奇史詩、時間軌跡、沉穩榮耀」為核心設計概念，…",
-    "score": 9.1
-   }
-  ],
+  "uni": [],
   "dragon": [
    {
-    "title": "遭球迷當面「比中指」！味全龍啦啦隊女神錯愕：不知做錯什麼",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef7ca34c83b4eaff9ae56f94bd&url=https%3a%2f%2fnews.tvbs.com.tw%2fentertainment%2f4016423&c=8066132907903564706&mkt=zh-tw",
-    "source": "",
-    "pub": "Wed, 02 Sep 2026 08:50:00 GMT",
-    "summary": "味全龍啦啦隊「Dragon Beauties」小龍女練習生于甄，過去曾是日本職棒福岡軟銀鷹的啦啦隊成員，今年8月返台並順利通過徵選加入小龍女，憑藉甜美外型…",
-    "score": 0.4
-   },
-   {
     "title": "中職》龍迷注意！味全龍大巨蛋專櫃9月7日開幕 3件85折再送小龍女限定卡",
-    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa0d4ef7ca34c83b4eaff9ae56f94bd&url=https%3a%2f%2ftw.sports.yahoo.com%2fnews%2f%25E4%25B8%25AD%25E8%2581%25B7-%25E9%25BE%258D%25E8%25BF%25B7%25E6%25B3%25A8%25E6%2584%258F-%25E5%2591%25B3%25E5%2585%25A8%25E9%25BE%258D%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%25E5%25B0%2588%25E6%25AB%25839%25E6%259C%25887%25E6%2597%25A5%25E9%2596%258B%25E5%25B9%2595-3%25E4%25BB%25B685%25E6%258A%2598%25E5%2586%258D%25E9%2580%2581%25E5%25B0%258F%25E9%25BE%258D%25E5%25A5%25B3%25E9%2599%2590%25E5%25AE%259A%25E5%258D%25A1-093354220.html&c=3035463457277250063&mkt=zh-tw",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd7d5844e53b59d48ffb5ef1261&url=https%3a%2f%2ftw.sports.yahoo.com%2fnews%2f%25E4%25B8%25AD%25E8%2581%25B7-%25E9%25BE%258D%25E8%25BF%25B7%25E6%25B3%25A8%25E6%2584%258F-%25E5%2591%25B3%25E5%2585%25A8%25E9%25BE%258D%25E5%25A4%25A7%25E5%25B7%25A8%25E8%259B%258B%25E5%25B0%2588%25E6%25AB%25839%25E6%259C%25887%25E6%2597%25A5%25E9%2596%258B%25E5%25B9%2595-3%25E4%25BB%25B685%25E6%258A%2598%25E5%2586%258D%25E9%2580%2581%25E5%25B0%258F%25E9%25BE%258D%25E5%25A5%25B3%25E9%2599%2590%25E5%25AE%259A%25E5%258D%25A1-093354220.html&c=3035463457277250063&mkt=zh-tw",
     "source": "",
     "pub": "Wed, 02 Sep 2026 02:33:00 GMT",
     "summary": "味全龍再拓展球迷服務據點，球團宣布「Dragons Shop 大巨蛋專櫃」將於9月7日正式開幕，進駐遠東 Garden City B2花園綠廊，設櫃期間至…",
+    "score": 0.0
+   },
+   {
+    "title": "遭球迷當面「比中指」！味全龍啦啦隊女神錯愕：不知做錯什麼",
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6aa11cd7d5844e53b59d48ffb5ef1261&url=https%3a%2f%2fnews.tvbs.com.tw%2fentertainment%2f4016423&c=8066132907903564706&mkt=zh-tw",
+    "source": "",
+    "pub": "Wed, 02 Sep 2026 08:50:00 GMT",
+    "summary": "味全龍啦啦隊「Dragon Beauties」小龍女練習生于甄，過去曾是日本職棒福岡軟銀鷹的啦啦隊成員，今年8月返台並順利通過徵選加入小龍女，憑藉甜美外型…",
     "score": 0.0
    }
   ],
   "tsg": []
  },
- "youtube": {},
+ "youtube": {
+  "rakuten": {
+   "channelId": "UC-3vXiVbUk6eeWA0mde94uQ",
+   "live": "https://www.youtube.com/embed/live_stream?channel=UC-3vXiVbUk6eeWA0mde94uQ",
+   "channelUrl": "https://www.youtube.com/channel/UC-3vXiVbUk6eeWA0mde94uQ",
+   "videos": [
+    {
+     "id": "nOGvKhOYPUM",
+     "title": "0829｜任意門一開 琳妲搖身變可愛教主",
+     "pub": "2026-09-01T09:00:10+00:00"
+    },
+    {
+     "id": "clJIhXklOlA",
+     "title": "0830｜宋卉言首次合體 三姝同台火辣演出",
+     "pub": "2026-08-30T11:19:21+00:00"
+    },
+    {
+     "id": "RcmIVPBpf_M",
+     "title": "0828｜KAHO優雅芭蕾身段 重現《胡桃鉗》",
+     "pub": "2026-08-30T09:00:04+00:00"
+    }
+   ]
+  },
+  "fubon": {
+   "channelId": "UCRMJiV43bd2w-g9olgC7zhA",
+   "live": "https://www.youtube.com/embed/live_stream?channel=UCRMJiV43bd2w-g9olgC7zhA",
+   "channelUrl": "https://www.youtube.com/channel/UCRMJiV43bd2w-g9olgC7zhA",
+   "videos": [
+    {
+     "id": "wKiERcIQZ38",
+     "title": "09/08 范國宸第12轟！魔力藍第8勝 味全龍 vs 富邦悍將 悍將全場精華",
+     "pub": "2026-09-08T15:05:39+00:00"
+    },
+    {
+     "id": "R-cmEvsq-Co",
+     "title": "09/08 小跑車#葉子霆 精彩跑壘 躲過夾殺全員all safe",
+     "pub": "2026-09-08T13:38:40+00:00"
+    },
+    {
+     "id": "j7CxZ_XeU70",
+     "title": "09/08 #魔力藍 先發八局送出七K 無失分 繳出超優質好投拿下第8勝",
+     "pub": "2026-09-08T13:17:54+00:00"
+    }
+   ]
+  },
+  "tsg": {
+   "channelId": "UCVBlrH9PZRWtgrfcrjmXZMA",
+   "live": "https://www.youtube.com/embed/live_stream?channel=UCVBlrH9PZRWtgrfcrjmXZMA",
+   "channelUrl": "https://www.youtube.com/channel/UCVBlrH9PZRWtgrfcrjmXZMA",
+   "videos": [
+    {
+     "id": "eqtaP8KN0MI",
+     "title": "9月8日（二）例行賽 台鋼雄鷹VS.樂天桃猿 賽事精華",
+     "pub": "2026-09-08T14:18:16+00:00"
+    },
+    {
+     "id": "RuptU3jUMiA",
+     "title": "【9/8例行賽】#台鋼雄鷹@樂天桃園球場",
+     "pub": "2026-09-08T10:33:22+00:00"
+    },
+    {
+     "id": "EfKx9V6XI9w",
+     "title": "【#皇鷹學院】主視覺拍攝花絮 #陳文杰 #黃劼希 #高聖恩 #李欣穎 #王博玄 #顏郁軒╱Wing Stars #NINA #米亞",
+     "pub": "2026-09-08T07:07:34+00:00"
+    }
+   ]
+  }
+ },
  "instagram": {
   "yt_k14": {
    "name": "姿琳",
